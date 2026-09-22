@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MPI_Report.App_Start;
 
 namespace MPI_Report
 {
@@ -13,6 +14,7 @@ namespace MPI_Report
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            NinjectConfig.RegisterServices();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

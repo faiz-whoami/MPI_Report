@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MPI_Report.Models;
+﻿using MPI_Report.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 
 namespace MPI_Report.ViewModels
@@ -48,4 +45,19 @@ namespace MPI_Report.ViewModels
         [Display(Name = "Active")]
         public bool IsActive { get; set; }
     }
+    public class CustomerListItemViewModel
+        {
+            public int CustomerId { get; set; }
+
+            public string Name { get; set; }
+
+            public string Email { get; set; }
+
+            public string Phone { get; set; }
+
+            public string Address { get; set; }
+
+            public bool IsActive { get; set; }
+        }
+    
 }
