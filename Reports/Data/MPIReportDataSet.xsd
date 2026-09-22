@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MPIReportDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="MPIReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:Locale="en-GB">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReportHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InspectionReportId" type="xs:int" minOccurs="0" />
+              <xs:element name="WorkOrderNo" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportNo" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RecommendedDueDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CustomerName" type="xs:string" minOccurs="0" />
+              <xs:element name="TestLocation" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemDescription" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemSerialNo" type="xs:string" minOccurs="0" />
+              <xs:element name="Manufacturer" type="xs:string" minOccurs="0" />
+              <xs:element name="RatingSWL" type="xs:string" minOccurs="0" />
+              <xs:element name="ModelNo" type="xs:string" minOccurs="0" />
+              <xs:element name="ServiceType" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectionTypeCategory" type="xs:string" minOccurs="0" />
+              <xs:element name="Material" type="xs:string" minOccurs="0" />
+              <xs:element name="SurfaceCondition" type="xs:string" minOccurs="0" />
+              <xs:element name="LiftingCapacity" type="xs:string" minOccurs="0" />
+              <xs:element name="SurfaceTemperature" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Sensitivity" type="xs:string" minOccurs="0" />
+              <xs:element name="TestMethod" type="xs:string" minOccurs="0" />
+              <xs:element name="LightingMethod" type="xs:string" minOccurs="0" />
+              <xs:element name="MagnetismType" type="xs:string" minOccurs="0" />
+              <xs:element name="CurrentType" type="xs:string" minOccurs="0" />
+              <xs:element name="MagneticFieldDirection" type="xs:string" minOccurs="0" />
+              <xs:element name="ProcedureNo" type="xs:string" minOccurs="0" />
+              <xs:element name="AcceptanceCriteria" type="xs:string" minOccurs="0" />
+              <xs:element name="LightingType" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectedItemImagePath" type="xs:string" minOccurs="0" />
+              <xs:element name="Comments" type="xs:string" minOccurs="0" />
+              <xs:element name="AreaOfTesting" type="xs:string" minOccurs="0" />
+              <xs:element name="RestrictedAccess" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectionRemarks" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectionResult" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectorName" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectorQualification" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectorSignaturePath" type="xs:string" minOccurs="0" />
+              <xs:element name="InspectorSignedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ReviewerName" type="xs:string" minOccurs="0" />
+              <xs:element name="ReviewerDesignation" type="xs:string" minOccurs="0" />
+              <xs:element name="ReviewerSignaturePath" type="xs:string" minOccurs="0" />
+              <xs:element name="ReviewedDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Equipment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InspectionEquipmentId" type="xs:int" minOccurs="0" />
+              <xs:element name="InspectionReportId" type="xs:int" minOccurs="0" />
+              <xs:element name="EquipmentName" type="xs:string" minOccurs="0" />
+              <xs:element name="EquipmentSerialNo" type="xs:string" minOccurs="0" />
+              <xs:element name="CalibrationDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CalibrationDueDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Consumables">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InspectionConsumableId" type="xs:int" minOccurs="0" />
+              <xs:element name="InspectionReportId" type="xs:int" minOccurs="0" />
+              <xs:element name="ConsumableName" type="xs:string" minOccurs="0" />
+              <xs:element name="BrandType" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TestEvaluation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TestEvaluationId" type="xs:int" minOccurs="0" />
+              <xs:element name="InspectionReportId" type="xs:int" minOccurs="0" />
+              <xs:element name="JointNo" type="xs:string" minOccurs="0" />
+              <xs:element name="WelderId" type="xs:string" minOccurs="0" />
+              <xs:element name="WeldLength" type="xs:string" minOccurs="0" />
+              <xs:element name="Discontinuity" type="xs:string" minOccurs="0" />
+              <xs:element name="StartLocation" type="xs:string" minOccurs="0" />
+              <xs:element name="EndLocation" type="xs:string" minOccurs="0" />
+              <xs:element name="DefectLength" type="xs:string" minOccurs="0" />
+              <xs:element name="Evaluation" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

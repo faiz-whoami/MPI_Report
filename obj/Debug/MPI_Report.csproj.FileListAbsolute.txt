@@ -109,3 +109,5 @@ C:\Users\skywo\source\repos\MPI_Report\MPI_Report\bin\Ninject.xml
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\bin\Ninject.Web.Common.xml
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\bin\Ninject.Web.Common.WebHost.xml
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\bin\Ninject.Web.Mvc.xml
+D:\Projects\SkySoft\MPI_Report\obj\Debug\MPI_Report.dll
+D:\Projects\SkySoft\MPI_Report\obj\Debug\MPI_Report.pdb

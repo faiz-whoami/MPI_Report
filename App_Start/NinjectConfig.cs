@@ -31,6 +31,10 @@ namespace MPI_Report.App_Start
                   .To<CustomerService>()
                   .InRequestScope();
 
+            kernel.Bind<IInspectionReportService>()
+                  .To<InspectionReportService>()
+                  .InRequestScope();
+
             // AutoMapper
             IMapper mapper = new MapperConfiguration(cfg =>
             {

@@ -225,6 +225,8 @@
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Reports\Data\MPIReportDataSet.xsd" />
+    <Content Include="Scripts\SeedMpiCert1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

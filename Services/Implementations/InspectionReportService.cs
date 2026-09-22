@@ -52,7 +52,7 @@ namespace MPI_Report.Services.Implementations
 
             string reportPath =
                 HostingEnvironment.MapPath(
-                    "~/Reports/MPIInspectionReport.rpt");
+                    "~/Reports/InspectionReport.rpt");
 
             if (string.IsNullOrWhiteSpace(reportPath) ||
                 !File.Exists(reportPath))
@@ -69,6 +69,11 @@ namespace MPI_Report.Services.Implementations
 
                 reportDocument.SetDataSource(
                     reportData.DataSet);
+
+                foreach (ReportDocument subReport in reportDocument.Subreports)
+                {
+                    subReport.SetDataSource(reportData.DataSet);
+                }
 
                 using (Stream stream =
                     reportDocument.ExportToStream(
