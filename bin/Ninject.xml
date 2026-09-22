@@ -2267,14 +2267,6 @@
             </summary>
             <value><c>true</c> if null is allowed as injected value otherwise false.</value>
         </member>
-        <member name="P:Ninject.INinjectSettings.ThrowOnGetServiceNotFound">
-            <summary>
-            Gets or sets a value indicating whether the old (&lt;= 3.3.4) behavior of <see cref="M:System.IServiceProvider.GetService(System.Type)"/>
-            should be used which throws an exception if the requested service cannot be found. Note that the documentation
-            of that method https://docs.microsoft.com/en-us/dotnet/api/system.iserviceprovider.getservice?view=netframework-4.6.2
-            states that the method should return <see langword="null"/> if there is no such service.
-            </summary>
-        </member>
         <member name="M:Ninject.INinjectSettings.Get``1(System.String,``0)">
             <summary>
             Gets the value for the specified key.
@@ -2914,14 +2906,6 @@
             <value>
             <c>true</c> if null is allowed as injected value otherwise false.
             </value>
-        </member>
-        <member name="P:Ninject.NinjectSettings.ThrowOnGetServiceNotFound">
-            <summary>
-            Gets or sets a value indicating whether the old (&lt;= 3.3.4) behavior of <see cref="M:System.IServiceProvider.GetService(System.Type)"/>
-            should be used which throws an exception if the requested service cannot be found. Note that the documentation
-            of that method https://docs.microsoft.com/en-us/dotnet/api/system.iserviceprovider.getservice?view=netframework-4.6.2
-            states that the method should return <see langword="null"/> if there is no such service.
-            </summary>
         </member>
         <member name="M:Ninject.NinjectSettings.Get``1(System.String,``0)">
             <summary>
