@@ -16,14 +16,14 @@ namespace MPI_Report.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class InspectionReport : ReportClass {
+    public class InspectionReport2 : ReportClass {
         
-        public InspectionReport() {
+        public InspectionReport2() {
         }
         
         public override string ResourceName {
             get {
-                return "InspectionReport.rpt";
+                return "InspectionReport2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace MPI_Report.Reports {
         
         public override string FullResourceName {
             get {
-                return "MPI_Report.Reports.InspectionReport.rpt";
+                return "MPI_Report.Reports.InspectionReport2.rpt";
             }
             set {
                 // Do nothing
@@ -98,7 +98,7 @@ namespace MPI_Report.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection4 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
@@ -106,17 +106,25 @@ namespace MPI_Report.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[8];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedInspectionReport : Component, ICachedReport {
+    public class CachedInspectionReport2 : Component, ICachedReport {
         
-        public CachedInspectionReport() {
+        public CachedInspectionReport2() {
         }
         
         [Browsable(false)]
@@ -153,7 +161,7 @@ namespace MPI_Report.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            InspectionReport rpt = new InspectionReport();
+            InspectionReport2 rpt = new InspectionReport2();
             rpt.Site = this.Site;
             return rpt;
         }
