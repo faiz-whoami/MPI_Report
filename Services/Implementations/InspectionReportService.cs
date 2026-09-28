@@ -9,7 +9,9 @@ using System.Data.Entity;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Hosting;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace MPI_Report.Services.Implementations
 {
@@ -35,6 +37,12 @@ namespace MPI_Report.Services.Implementations
             return report;
         }
 
+        public List<InspectionReport> GetAllReports()
+        {
+            return _context.InspectionReports
+              .OrderBy(x => x.InspectionReportId)
+              .ToList();
+        }
         public async Task<byte[]> GeneratePdfAsync(int id)
         {
             //Get Inspection Report Data.
