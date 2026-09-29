@@ -13,10 +13,19 @@ namespace MPI_Report.Controllers
         {
             _reportService = reportService;
         }
+        public ActionResult Index()
+        {
+            var reports = _reportService.GetAllReports();
+
+            return View(reports);
+        }
+
 
         [HttpGet]
         public async Task<ActionResult> MPI(int id)
         {
+
+            
             byte[] pdf =
                 await _reportService.GeneratePdfAsync(id);
 

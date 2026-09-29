@@ -2,7 +2,10 @@
 using System.Data;
 using MPI_Report.Models;
 using InspectionReportModel = MPI_Report.Models.InspectionReport;
+using Newtonsoft.Json;
+
 namespace MPI_Report.Reports.Data
+    
 {
     public class MPIReportDataSet
     {
@@ -148,6 +151,13 @@ namespace MPI_Report.Reports.Data
         private void PopulateReportHeader(InspectionReportModel report)
         {
             DataTable table = DataSet.Tables["ReportHeader"];
+
+            string json = JsonConvert.SerializeObject(
+              table,
+              Formatting.Indented
+          );
+
+            System.Diagnostics.Debug.WriteLine("Report Header Data from Table", json);
 
             DataRow row = table.NewRow();
 

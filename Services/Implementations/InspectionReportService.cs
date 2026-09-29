@@ -9,6 +9,9 @@ using System.Data.Entity;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Hosting;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace MPI_Report.Services.Implementations
 {
@@ -31,12 +34,18 @@ namespace MPI_Report.Services.Implementations
                     .Include(r => r.TestEvaluations)
                     .FirstOrDefaultAsync(
                         r => r.InspectionReportId == id);
-
             return report;
         }
 
+        public List<InspectionReport> GetAllReports()
+        {
+            return _context.InspectionReports
+              .OrderBy(x => x.InspectionReportId)
+              .ToList();
+        }
         public async Task<byte[]> GeneratePdfAsync(int id)
         {
+            //Get Inspection Report Data.
             InspectionReport report =
                 await GetReportDataAsync(id);
 
@@ -44,15 +53,24 @@ namespace MPI_Report.Services.Implementations
             {
                 return null;
             }
-
+            //Fetch Data tables
             MPIReportDataSet reportData =
                 new MPIReportDataSet();
 
+            
+           
             reportData.Build(report);
+            //Build is Populating the Data Correctly.
+           // string json = JsonConvert.SerializeObject(
+           //    reportData.DataSet,
+           //    Formatting.Indented
+           //);
 
+           // System.Diagnostics.Debug.WriteLine("Report Data", json);
             string reportPath =
                 HostingEnvironment.MapPath(
-                    "~/Reports/InspectionReport.rpt");
+                    "~/Reports/InspectionReport2.rpt");
+
 
             if (string.IsNullOrWhiteSpace(reportPath) ||
                 !File.Exists(reportPath))
@@ -65,10 +83,22 @@ namespace MPI_Report.Services.Implementations
             using (ReportDocument reportDocument =
                 new ReportDocument())
             {
-                reportDocument.Load(reportPath);
+               reportDocument.Load(reportPath);
+
 
                 reportDocument.SetDataSource(
                     reportData.DataSet);
+                reportDocument.SetDataSource(reportData.DataSet);
+
+                foreach (CrystalDecisions.CrystalReports.Engine.Table table
+                         in reportDocument.Database.Tables)
+                {
+                    //System.Diagnostics.Debug.WriteLine(
+                    //    "Table Name: " + table.Name);
+
+                    //System.Diagnostics.Debug.WriteLine(
+                    //    "Location: " + table.Location);
+                }
 
                 foreach (ReportDocument subReport in reportDocument.Subreports)
                 {
