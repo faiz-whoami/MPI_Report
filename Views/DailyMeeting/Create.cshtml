@@ -1,0 +1,33 @@
+@model MPI_Report.Models.DailyMeeting
+
+@{
+    ViewBag.Title = "Add daily meeting";
+}
+
+<h2>Add daily meeting</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.MeetingDate)
+        @Html.TextBoxFor(m => m.MeetingDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Signatures)
+        @Html.TextBoxFor(m => m.Signatures, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

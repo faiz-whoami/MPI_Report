@@ -31,9 +31,15 @@ namespace MPI_Report.Models
         // Navigation Property
         public virtual ICollection<InspectionReport> InspectionReports { get; set; }
 
+        public virtual ICollection<Rig> Rigs { get; set; }
+
+        public virtual ICollection<Job> Jobs { get; set; }
+
         public Customer()
         {
             InspectionReports = new HashSet<InspectionReport>();
+            Rigs = new HashSet<Rig>();
+            Jobs = new HashSet<Job>();
 
             IsActive = true;
             CreatedDate = DateTime.Now;

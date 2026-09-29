@@ -1,0 +1,46 @@
+@model MPI_Report.Models.InventoryItem
+
+@{
+    ViewBag.Title = "Add inventory item";
+}
+
+<h2>Add inventory item</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ItemCode)
+        @Html.TextBoxFor(m => m.ItemCode, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Position)
+        @Html.TextBoxFor(m => m.Position, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ItemType)
+        @Html.TextBoxFor(m => m.ItemType, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SpecialType)
+        @Html.TextBoxFor(m => m.SpecialType, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

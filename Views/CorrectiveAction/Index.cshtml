@@ -1,0 +1,30 @@
+@model IEnumerable<MPI_Report.Models.CorrectiveAction>
+
+@{
+    ViewBag.Title = "Corrective actions";
+}
+
+<h2>Corrective actions</h2>
+<p>@Html.ActionLink("Add corrective action", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Criticality</th>
+            <th>Status</th>
+            <th>Due</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Criticality</td>
+                <td>@item.Status</td>
+                <td>@(item.DueDate.HasValue ? item.DueDate.Value.ToString("dd-MMM-yy") : "")</td>
+            </tr>
+        }
+    </tbody>
+</table>

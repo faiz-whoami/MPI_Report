@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace MPI_Report.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IInspectionReportService _reportService;
@@ -13,26 +14,20 @@ namespace MPI_Report.Controllers
         {
             _reportService = reportService;
         }
+
         public ActionResult Index()
         {
-            var reports = _reportService.GetAllReports();
-
-            return View(reports);
+            return View(_reportService.GetAllReports());
         }
-
 
         [HttpGet]
         public async Task<ActionResult> MPI(int id)
         {
-
-            
-            byte[] pdf =
-                await _reportService.GeneratePdfAsync(id);
+            byte[] pdf = await _reportService.GeneratePdfAsync(id);
 
             if (pdf == null)
             {
-                return HttpNotFound(
-                    "Inspection report was not found.");
+                return HttpNotFound("Inspection report was not found.");
             }
 
             return File(

@@ -35,6 +35,11 @@ namespace MPI_Report.Models
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
 
+        public int? JobId { get; set; }
+
+        [ForeignKey("JobId")]
+        public virtual Job Job { get; set; }
+
 
         //INSPECTED MATERIAL PARTICULAR
         [StringLength(250)]

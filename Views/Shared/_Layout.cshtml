@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Inspections Track</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,21 +16,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Magnetic Particle Inspection", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Inspections Track", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Report", "Index", "Report")</li>
+                    <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
+                    <li>@Html.ActionLink("Checklists", "Index", "Checklist")</li>
+                    <li>@Html.ActionLink("Corrective Actions", "Index", "CorrectiveAction")</li>
+                    <li>@Html.ActionLink("Daily Meetings", "Index", "DailyMeeting")</li>
+                    <li>@Html.ActionLink("MPI Reports", "Index", "Report")</li>
+                    <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li><a href="#">@User.Identity.Name</a></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-info" style="margin-top: 15px;">@TempData["Message"]</div>
+        }
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Magnetic Particle Inspection</p>
+            <p>&copy; @DateTime.Now.Year - Sky Soft Connections / Inspections Track</p>
         </footer>
     </div>
 

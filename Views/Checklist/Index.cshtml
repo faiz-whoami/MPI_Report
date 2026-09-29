@@ -1,0 +1,30 @@
+@model IEnumerable<MPI_Report.Models.InspectionChecklist>
+
+@{
+    ViewBag.Title = "Inspection checklists";
+}
+
+<h2>Inspection checklists</h2>
+<p>@Html.ActionLink("Add checklist", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Frequency</th>
+            <th>Date</th>
+            <th>Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Frequency</td>
+                <td>@item.ChecklistDate.ToString("dd-MMM-yy")</td>
+                <td>@(item.Items != null ? item.Items.Count : 0)</td>
+            </tr>
+        }
+    </tbody>
+</table>

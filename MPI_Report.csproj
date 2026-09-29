@@ -15,7 +15,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MPI_Report</RootNamespace>
     <AssemblyName>MPI_Report</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>7.3</LangVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -35,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -140,8 +143,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChecklistController.cs" />
+    <Compile Include="Controllers\CorrectiveActionController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DailyMeetingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Repositories\Implementations\CustomerRepository.cs" />
@@ -149,17 +157,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\JobContext.cs" />
+    <Compile Include="Infrastructure\PasswordHasher.cs" />
     <Compile Include="Mapping\MappingProfile.cs" />
     <Compile Include="Migrations\202609221052224_InitialCreate.cs" />
     <Compile Include="Migrations\202609221052224_InitialCreate.designer.cs">
       <DependentUpon>202609221052224_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202609300100000_AddInspectionTrackPlatform.cs" />
+    <Compile Include="Migrations\202609300100000_AddInspectionTrackPlatform.Designer.cs">
+      <DependentUpon>202609300100000_AddInspectionTrackPlatform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChecklistItem.cs" />
+    <Compile Include="Models\CorrectiveAction.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DailyMeeting.cs" />
+    <Compile Include="Models\InspectionChecklist.cs" />
     <Compile Include="Models\InspectionConsumable.cs" />
     <Compile Include="Models\InspectionEquipment.cs" />
     <Compile Include="Models\InspectionReport.cs" />
+    <Compile Include="Models\InventoryItem.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Rig.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\TestEvaluation.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Data\MPIReportDataSet.cs" />
     <Compile Include="Reports\InspectionReport.cs">
@@ -174,14 +197,20 @@
       <DependentUpon>InspectionReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\Implementations\AccountService.cs" />
     <Compile Include="Services\Implementations\CustomerService.cs" />
     <Compile Include="Services\Implementations\InspectionReportService.cs" />
+    <Compile Include="Services\Implementations\PlatformService.cs" />
+    <Compile Include="Services\Interfaces\IAccountService.cs" />
     <Compile Include="Services\Interfaces\ICustomerService.cs" />
     <Compile Include="Services\Interfaces\IInspectionReportService.cs" />
+    <Compile Include="Services\Interfaces\IPlatformService.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\CustomerViewModels.cs" />
     <Compile Include="ViewModels\InspectionConsumableViewModel.cs" />
     <Compile Include="ViewModels\InspectionEquipmentViewModel.cs" />
     <Compile Include="ViewModels\InspectionReportViewModel.cs" />
+    <Compile Include="ViewModels\PlatformViewModels.cs" />
     <Compile Include="ViewModels\TestEvaluationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,14 +252,27 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Reports\Data\MPIReportDataSet.xsd" />
     <Content Include="Scripts\SeedMpiCert1.sql" />
+    <Content Include="Scripts\AddInspectionTrackPlatform.sql" />
+    <Content Include="Scripts\SeedPlatform.sql" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Inventory\Create.cshtml" />
+    <Content Include="Views\Checklist\Index.cshtml" />
+    <Content Include="Views\Checklist\Create.cshtml" />
+    <Content Include="Views\CorrectiveAction\Index.cshtml" />
+    <Content Include="Views\CorrectiveAction\Create.cshtml" />
+    <Content Include="Views\DailyMeeting\Index.cshtml" />
+    <Content Include="Views\DailyMeeting\Create.cshtml" />
+    <Content Include="Docs\DatabaseAndDeployment.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
