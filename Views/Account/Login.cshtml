@@ -31,11 +31,11 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="checkbox">
+                    @*<div class="checkbox">
                         <label>
                             @Html.CheckBoxFor(m => m.RememberMe) Remember me
                         </label>
-                    </div>
+                    </div>*@
 
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                 }

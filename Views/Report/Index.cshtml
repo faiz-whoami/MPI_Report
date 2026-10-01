@@ -11,18 +11,21 @@
         <div class="page-header">
             <h2>Inspection Reports</h2>
             <p class="text-muted">
-                Select an inspection report and generate its PDF.
+                Select an inspection report and compare EF and Stored Procedure performance.
             </p>
         </div>
 
         <div class="panel panel-default">
+
             <div class="panel-heading">
                 <strong>Generate MPI Report</strong>
             </div>
 
             <div class="panel-body">
 
+                <!-- Report Selection -->
                 <div class="form-group">
+
                     <label for="reportSelect">
                         Select Inspection Report
                     </label>
@@ -37,33 +40,82 @@
                         @foreach (var report in Model)
                         {
                             <option value="@report.InspectionReportId">
-                                @report.ReportNo
-                                -
-                                @report.WorkOrderNo
+                                @report.ReportNo - @report.WorkOrderNo
                             </option>
                         }
 
                     </select>
+
                 </div>
 
+
+                <!-- Fetch Method -->
+                <div class="form-group">
+
+                    <label>
+                        Data Fetch Method
+                    </label>
+
+                    <div>
+
+                        <label class="radio-inline">
+                            <input type="radio"
+                                   name="fetchMethod"
+                                   value="false"
+                                   checked />
+                            Entity Framework
+                        </label>
+
+                        <label class="radio-inline">
+                            <input type="radio"
+                                   name="fetchMethod"
+                                   value="true" />
+                            Stored Procedure
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Generate Button -->
                 <div class="form-group">
 
                     <button type="button"
                             id="generateReportBtn"
                             class="btn btn-primary"
                             disabled>
+
                         Generate Report
+
                     </button>
 
                 </div>
 
+
+                <!-- Loading -->
+                <div id="loadingMessage"
+                     class="alert alert-warning"
+                     style="display:none;">
+
+                    Generating report...
+
+                </div>
+
+
+                <!-- Result -->
                 <div id="reportMessage"
                      class="alert alert-info"
                      style="display:none;">
+
                 </div>
 
             </div>
+
         </div>
+
+
+        <!-- Available Reports -->
 
         <div class="panel panel-default">
 
@@ -85,59 +137,176 @@
     </div>
 </div>
 
+
 @section scripts {
+
     <script>
 
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        var reportSelect = $('#reportSelect');
-        var generateButton = $('#generateReportBtn');
+    var reportSelect = $('#reportSelect');
+
+    var generateButton = $('#generateReportBtn');
+
+    var reportMessage = $('#reportMessage');
+
+    var loadingMessage = $('#loadingMessage');
+
+
+    /*
+     * Enable Generate button
+     */
+    reportSelect.on('change', function () {
+
+        var reportId = $(this).val();
+
+        generateButton.prop(
+            'disabled',
+            !reportId
+        );
+
+    });
+
+
+    /*
+     * Generate Report
+     */
+    generateButton.on('click', function () {
+
+        var reportId = reportSelect.val();
+
+        if (!reportId) {
+            return;
+        }
+
 
         /*
-         * Enable Generate Report button
-         * when a report is selected.
+         * Get selected method.
+         *
+         * false = Entity Framework
+         * true  = Stored Procedure
          */
-        reportSelect.on('change', function () {
-
-            var reportId = $(this).val();
-
-            if (reportId) {
-
-                generateButton.prop('disabled', false);
-
-            }
-            else {
-
-                generateButton.prop('disabled', true);
-
-            }
-
-        });
+        var useStoredProcedure =
+            $('input[name="fetchMethod"]:checked').val();
 
 
         /*
-         * Generate Report
+         * Show loading
          */
-        generateButton.on('click', function () {
+        generateButton.prop('disabled', true);
 
-            var reportId = reportSelect.val();
+        loadingMessage.show();
 
-            if (!reportId) {
-                return;
+        reportMessage.hide();
+
+
+        /*
+         * Request PDF
+         */
+        $.ajax({
+
+            url: '@Url.Action("MPI", "Report")',
+
+            type: 'GET',
+
+            data: {
+                id: reportId,
+                sp: useStoredProcedure
+            },
+
+            xhrFields: {
+                responseType: 'blob'
+            },
+
+            success: function (data, status, xhr) {
+
+                /*
+                 * Get execution time
+                 * from response header.
+                 */
+                var fetchTime =
+                    xhr.getResponseHeader(
+                        'X-Data-Fetch-Time-Ms'
+                    );
+
+
+                /*
+                 * Determine method
+                 */
+                var method =
+                    useStoredProcedure === 'true'
+                        ? 'Stored Procedure'
+                        : 'Entity Framework';
+
+
+                /*
+                 * Display timing
+                 */
+                reportMessage
+                    .removeClass('alert-danger')
+                    .addClass('alert-success')
+                    .html(
+                        '<strong>' +
+                        method +
+                        '</strong><br />' +
+                        'Data Fetch Time: ' +
+                        '<strong>' +
+                        (fetchTime || 'N/A') +
+                        ' ms</strong>'
+                    )
+                    .show();
+
+
+                /*
+                 * Create PDF URL
+                 */
+                var blobUrl =
+                    window.URL.createObjectURL(data);
+
+
+                /*
+                 * Open PDF
+                 */
+                window.open(blobUrl, '_blank');
+
+
+                /*
+                 * Re-enable button
+                 */
+                generateButton.prop(
+                    'disabled',
+                    false
+                );
+
+                loadingMessage.hide();
+
+            },
+
+            error: function (xhr) {
+
+                loadingMessage.hide();
+
+                reportMessage
+                    .removeClass('alert-info')
+                    .addClass('alert-danger')
+                    .html(
+                        'Unable to generate the report.'
+                    )
+                    .show();
+
+                generateButton.prop(
+                    'disabled',
+                    false
+                );
+
             }
-
-            /*
-             * Navigate to:
-             *
-             * /Report/MPI/{id}
-             *
-             */
-            window.location.href =
-                '@Url.Action("MPI", "Report")/' + reportId;
 
         });
 
     });
 
+});
+
     </script>
+
 }

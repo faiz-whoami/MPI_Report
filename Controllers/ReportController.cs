@@ -21,9 +21,9 @@ namespace MPI_Report.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> MPI(int id)
+        public async Task<ActionResult> MPI(int id, bool? Sp)
         {
-            byte[] pdf = await _reportService.GeneratePdfAsync(id);
+            byte[] pdf = await _reportService.GeneratePdfAsync(id, Sp);
 
             if (pdf == null)
             {

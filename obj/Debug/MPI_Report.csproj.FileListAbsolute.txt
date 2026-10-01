@@ -109,3 +109,4 @@ C:\Users\skywo\source\repos\MPI_Report\MPI_Report\obj\Debug\MPI_Report.csproj.Co
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\obj\Debug\MPI_Report.csproj.CopyComplete
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\obj\Debug\MPI_Report.dll
 C:\Users\skywo\source\repos\MPI_Report\MPI_Report\obj\Debug\MPI_Report.pdb
+C:\Users\skywo\source\repos\MPI_Report\MPI_Report\obj\Debug\MPI_Report.Migrations.AddInspectionTrackPlatform.resources

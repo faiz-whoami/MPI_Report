@@ -5,7 +5,7 @@ namespace MPI_Report.Services.Interfaces
 {
     public interface IInspectionReportService
     {
-        Task<byte[]> GeneratePdfAsync(int id);
+        Task<byte[]> GeneratePdfAsync(int id, bool? sp);
         List<InspectionReport> GetAllReports();
     }
 }

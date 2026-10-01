@@ -1,20 +1,5 @@
 # Database and first-run setup
 
-This project is ASP.NET MVC 5, .NET Framework 4.8, Entity Framework 6, C# 7.3, Crystal Reports. Do not use C# 8 features.
-
-I did not run migrations, IIS, or SQL from the development agent. Do the steps below on your machine.
-
-## 1. Target framework
-
-Visual Studio should show target **.NET Framework 4.8**. `Web.config` compilation and httpRuntime are `4.8`. Language version is **7.3**.
-
-Install the .NET Framework 4.8 developer pack if the project will not load.
-
-## 2. NuGet restore
-
-In Visual Studio: **Restore NuGet Packages**. Package folders are expected at `d:\Projects\SkySoft\packages` (HintPath `..\packages\`).
-
-You also need **SAP Crystal Reports for Visual Studio** runtime matching 13.0.4000.
 
 ## 3. Database
 

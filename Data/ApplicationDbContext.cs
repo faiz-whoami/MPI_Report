@@ -6,7 +6,7 @@ namespace MPI_Report.Data
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
-            : base("name=MPI_Report")
+            : base("name=MPI_Report_Cpy")
         {
         }
 
