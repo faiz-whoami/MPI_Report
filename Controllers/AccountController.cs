@@ -20,6 +20,7 @@ namespace MPI_Report.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
+            //TODO: Check User Authentication in ASP .NET MVC
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
