@@ -1,0 +1,11 @@
+<section class="app-page form-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Job checklist</p><h1>Create checklist</h1></div><a class="btn btn-default" href="#/checklists">Back to checklists</a></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <form name="checklistForm" class="form-horizontal form-surface" ng-submit="vm.save()" novalidate>
+        <div class="form-group" ng-class="{'has-error': vm.errors.Title}"><label class="col-sm-3 control-label" for="checklist-title">Title</label><div class="col-sm-7"><input class="form-control" id="checklist-title" ng-model="vm.checklist.Title" maxlength="150" required /><span class="field-error" ng-repeat="message in vm.errors.Title">{{ message }}</span></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="checklist-frequency">Frequency</label><div class="col-sm-7"><select class="form-control" id="checklist-frequency" ng-model="vm.checklist.Frequency" ng-options="frequency for frequency in vm.frequencies"></select></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="checklist-date">Date</label><div class="col-sm-7"><input class="form-control" id="checklist-date" type="date" ng-model="vm.checklist.ChecklistDate" /></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="checklist-items">Items</label><div class="col-sm-7"><textarea class="form-control" id="checklist-items" rows="7" ng-model="vm.checklist.itemLines" placeholder="One item per line"></textarea><p class="help-block">Enter one checklist item per line.</p></div></div>
+        <div class="form-actions col-sm-offset-3"><button class="btn btn-primary" type="submit" ng-disabled="checklistForm.$invalid">Save checklist</button><a class="btn btn-link" href="#/checklists">Cancel</a></div>
+    </form>
+</section>

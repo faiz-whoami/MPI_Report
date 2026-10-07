@@ -1,0 +1,5 @@
+<section class="app-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Customer directory</p><h1>{{ vm.customer.Name || 'Customer details' }}</h1></div><div class="heading-actions"><a class="btn btn-primary" ng-href="#/customers/{{ vm.customer.CustomerId }}/edit">Edit customer</a><a class="btn btn-default" href="#/customers">Back to customers</a></div></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <dl class="detail-list" ng-if="!vm.error"><dt>Email</dt><dd>{{ vm.customer.Email || 'Not provided' }}</dd><dt>Phone</dt><dd>{{ vm.customer.Phone || 'Not provided' }}</dd><dt>Address</dt><dd>{{ vm.customer.Address || 'Not provided' }}</dd><dt>Status</dt><dd>{{ vm.customer.IsActive ? 'Active' : 'Inactive' }}</dd></dl>
+</section>

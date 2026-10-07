@@ -1,0 +1,24 @@
+<section class="login-shell" ng-cloak>
+    <div class="login-brand">
+        <span class="login-mark">IT</span>
+        <div>
+            <p class="eyebrow">Inspections Track</p>
+            <h1>Sign in</h1>
+            <p class="text-muted">Use your account to continue.</p>
+        </div>
+    </div>
+    <div class="login-panel">
+        <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+        <form name="loginForm" ng-submit="vm.login()" autocomplete="on" novalidate>
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input class="form-control input-lg" id="login-username" name="Username" type="text" ng-model="vm.credentials.Username" autocomplete="username" required />
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input class="form-control input-lg" id="login-password" name="Password" type="password" ng-model="vm.credentials.Password" autocomplete="current-password" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="loginForm.$invalid || vm.loading">{{ vm.loading ? 'Signing in...' : 'Login' }}</button>
+        </form>
+    </div>
+</section>

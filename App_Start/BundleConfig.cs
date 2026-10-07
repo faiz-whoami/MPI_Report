@@ -22,9 +22,22 @@ namespace MPI_Report
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                      "~/Scripts/vendor/angular-1.8.2.min.js",
+                      "~/Scripts/vendor/angular-route-1.8.2.min.js",
+                      "~/Scripts/app/app.js",
+                      "~/Scripts/app/api-service.js",
+                      "~/Scripts/app/app-controller.js",
+                      "~/Scripts/app/dashboard-controller.js",
+                      "~/Scripts/app/operations-controller.js",
+                      "~/Scripts/app/customer-controller.js",
+                      "~/Scripts/app/report-controller.js",
+                      "~/Scripts/app/login-controller.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/app.css"));
         }
     }
 }

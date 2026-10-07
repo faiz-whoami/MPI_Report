@@ -1,0 +1,13 @@
+<section class="app-page form-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Job inventory</p><h1>Add inventory item</h1></div><a class="btn btn-default" href="#/inventory">Back to inventory</a></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <form name="inventoryForm" class="form-horizontal form-surface" ng-submit="vm.save()" novalidate>
+        <div class="form-group"><label class="col-sm-3 control-label" for="item-code">Code</label><div class="col-sm-7"><input class="form-control" id="item-code" ng-model="vm.item.ItemCode" maxlength="50" /><span class="field-error" ng-repeat="message in vm.errors.ItemCode">{{ message }}</span></div></div>
+        <div class="form-group" ng-class="{'has-error': vm.errors.Description}"><label class="col-sm-3 control-label" for="item-description">Description</label><div class="col-sm-7"><input class="form-control" id="item-description" ng-model="vm.item.Description" maxlength="250" required /><span class="field-error" ng-repeat="message in vm.errors.Description">{{ message }}</span></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="item-position">Position</label><div class="col-sm-7"><input class="form-control" id="item-position" ng-model="vm.item.Position" maxlength="100" /></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="item-type">Type</label><div class="col-sm-7"><input class="form-control" id="item-type" ng-model="vm.item.ItemType" maxlength="100" /></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="item-status">Status</label><div class="col-sm-7"><input class="form-control" id="item-status" ng-model="vm.item.Status" maxlength="50" /></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="item-special-type">Special type</label><div class="col-sm-7"><input class="form-control" id="item-special-type" ng-model="vm.item.SpecialType" maxlength="50" /></div></div>
+        <div class="form-actions col-sm-offset-3"><button class="btn btn-primary" type="submit" ng-disabled="inventoryForm.$invalid">Save item</button><a class="btn btn-link" href="#/inventory">Cancel</a></div>
+    </form>
+</section>

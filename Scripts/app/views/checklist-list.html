@@ -1,0 +1,13 @@
+<section class="app-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Job records</p><h1>Checklists</h1></div><a class="btn btn-primary" href="#/checklists/create">Create checklist</a></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <div class="table-responsive data-table-wrap">
+        <table class="table table-striped table-bordered data-table">
+            <thead><tr><th>Title</th><th>Frequency</th><th>Date</th><th>Items</th></tr></thead>
+            <tbody>
+                <tr ng-repeat="item in vm.items track by item.ChecklistId"><td>{{ item.Title }}</td><td>{{ item.Frequency }}</td><td>{{ item.ChecklistDate | date:'dd-MMM-yy' }}</td><td>{{ item.itemCount }}</td></tr>
+                <tr ng-if="!vm.error && !vm.items.length"><td colspan="4" class="empty-state">No checklists for this job.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

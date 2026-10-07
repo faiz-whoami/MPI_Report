@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using System.Web;
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
 using MPI_Report.Services.Interfaces;
@@ -22,37 +23,43 @@ namespace MPI_Report.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return Redirect(Url.Content("~/index.html") + "#/dashboard");
             }
 
-            ViewBag.ReturnUrl = returnUrl;
-            return View(new LoginViewModel());
+            string target = Url.Content("~/index.html") + "#/login";
+            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                target += "?returnUrl=" + HttpUtility.UrlEncode(returnUrl);
+            }
+
+            return Redirect(target);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model.Username) || string.IsNullOrWhiteSpace(model.Password))
             {
-                return View(model);
+                Response.StatusCode = 400;
+                return Json(new { message = "Enter a valid username and password." });
             }
 
             User user = _accountService.Validate(model.Username, model.Password);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Invalid username or password.");
-                return View(model);
+                Response.StatusCode = 400;
+                return Json(new { message = "Invalid username or password." });
             }
 
             FormsAuthentication.SetAuthCookie(user.Username, model.RememberMe);
 
             if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                return Json(new { success = true, returnUrl });
             }
 
-            return RedirectToAction("Index", "Home");
+            return Json(new { success = true, returnUrl = Url.Content("~/index.html") });
         }
 
         [Authorize]
@@ -61,7 +68,7 @@ namespace MPI_Report.Controllers
             FormsAuthentication.SignOut();
             JobContext.Clear(Session);
             Session.Abandon();
-            return RedirectToAction("Login");
+            return Json(new { success = true });
         }
     }
 }

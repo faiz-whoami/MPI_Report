@@ -17,7 +17,7 @@ namespace MPI_Report.Controllers
 
         public ActionResult Index()
         {
-            return View(_reportService.GetAllReports());
+            return Redirect(Url.Content("~/index.html") + "#/reports");
         }
 
         [HttpGet]

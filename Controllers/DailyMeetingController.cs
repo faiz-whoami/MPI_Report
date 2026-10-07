@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
@@ -19,59 +18,40 @@ namespace MPI_Report.Controllers
 
         public ActionResult Index()
         {
-            ActionResult redirect = RedirectIfNoJob();
-            if (redirect != null)
-            {
-                return redirect;
-            }
-
-            IList<DailyMeeting> items = _platformService.GetDailyMeetings(JobContext.GetJobId(Session).Value);
-            return View(items);
+            return Redirect(Url.Content("~/index.html") + "#/daily-meetings");
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            ActionResult redirect = RedirectIfNoJob();
-            if (redirect != null)
-            {
-                return redirect;
-            }
-
-            DailyMeeting model = new DailyMeeting();
-            model.MeetingDate = DateTime.Now;
-            return View(model);
+            return Redirect(Url.Content("~/index.html") + "#/daily-meetings/create");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(DailyMeeting model)
         {
-            ActionResult redirect = RedirectIfNoJob();
-            if (redirect != null)
+            int? jobId = JobContext.GetJobId(Session);
+            if (!jobId.HasValue)
             {
-                return redirect;
+                return Failure("Select a client / rig / job first.", 409);
             }
 
-            model.JobId = JobContext.GetJobId(Session).Value;
+            model.JobId = jobId.Value;
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Failure("Please correct the submitted meeting.", 400);
             }
 
             _platformService.AddDailyMeeting(model);
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
-        private ActionResult RedirectIfNoJob()
+        private ActionResult Failure(string message, int statusCode)
         {
-            if (!JobContext.GetJobId(Session).HasValue)
-            {
-                TempData["Message"] = "Select a client / rig / job first.";
-                return RedirectToAction("Index", "Home");
-            }
-
-            return null;
+            Response.StatusCode = statusCode;
+            Response.TrySkipIisCustomErrors = true;
+            return Json(new { message });
         }
     }
 }

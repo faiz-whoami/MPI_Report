@@ -1,0 +1,16 @@
+<section class="app-page" ng-cloak>
+    <header class="page-heading">
+        <div><p class="eyebrow">Job records</p><h1>Item Inventory</h1></div>
+        <a class="btn btn-primary" href="#/inventory/create">Add item</a>
+    </header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <div class="table-responsive data-table-wrap">
+        <table class="table table-striped table-bordered data-table">
+            <thead><tr><th>Code</th><th>Description</th><th>Position</th><th>Type</th><th>Status</th><th>Special type</th></tr></thead>
+            <tbody>
+                <tr ng-repeat="item in vm.items track by item.InventoryItemId"><td>{{ item.ItemCode }}</td><td>{{ item.Description }}</td><td>{{ item.Position }}</td><td>{{ item.ItemType }}</td><td>{{ item.Status }}</td><td>{{ item.SpecialType }}</td></tr>
+                <tr ng-if="!vm.error && !vm.items.length"><td colspan="6" class="empty-state">No inventory items for this job.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

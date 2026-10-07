@@ -1,0 +1,406 @@
+[ng-cloak] {
+    display: none !important;
+}
+
+body {
+    color: #263746;
+    background: #f3f6f7;
+}
+
+.navbar-inverse {
+    background-color: #173b4d;
+    border-color: #173b4d;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+    color: #edf5f5;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-brand:hover {
+    color: #ffffff;
+    background: #23536a;
+}
+
+.body-content {
+    padding-top: 70px;
+    min-height: calc(100vh - 56px);
+}
+
+.body-content.login-page {
+    min-height: 100vh;
+    padding-top: 1px;
+}
+
+.app-page {
+    padding: 10px 0 28px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 12px 0 24px;
+}
+
+.page-heading h1,
+.login-brand h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #173b4d;
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+    color: #607681;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.page-heading .text-muted {
+    margin: 0;
+}
+
+.job-picker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.job-picker label {
+    margin: 0;
+}
+
+.job-picker select {
+    min-width: 240px;
+    max-width: 360px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.metric {
+    display: flex;
+    min-height: 144px;
+    flex-direction: column;
+    padding: 18px 20px;
+    color: #263746;
+    background: #ffffff;
+    border: 1px solid #d8e1e4;
+    border-top: 3px solid #2c7a78;
+}
+
+.metric:hover,
+.metric:focus {
+    color: #173b4d;
+    text-decoration: none;
+    border-color: #9fb9bd;
+}
+
+.metric-alert {
+    border-top-color: #b64e42;
+}
+
+.metric-label {
+    color: #607681;
+    font-size: 13px;
+}
+
+.metric strong {
+    margin: 8px 0;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.metric-link {
+    margin-top: auto;
+    color: #2c7a78;
+    font-size: 12px;
+}
+
+.data-table-wrap {
+    border: 1px solid #d8e1e4;
+    background: #ffffff;
+}
+
+.data-table {
+    margin: 0;
+}
+
+.data-table thead th {
+    color: #3d5865;
+    background: #eaf0f1;
+    border-bottom-width: 1px;
+    white-space: nowrap;
+}
+
+.data-table td,
+.data-table th {
+    vertical-align: middle;
+}
+
+.empty-state,
+.loading-state {
+    padding: 24px !important;
+    color: #607681;
+    text-align: center;
+}
+
+.form-surface {
+    max-width: 900px;
+    padding: 22px 20px 8px;
+    background: #ffffff;
+    border: 1px solid #d8e1e4;
+}
+
+.form-page .page-heading {
+    align-items: center;
+}
+
+.form-actions {
+    margin: 0 0 14px;
+}
+
+.field-error {
+    display: block;
+    margin-top: 5px;
+    color: #a94442;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.filter-bar .form-group {
+    margin: 0;
+}
+
+.filter-bar label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.row-actions {
+    white-space: nowrap;
+}
+
+.row-actions > * {
+    margin-right: 12px;
+}
+
+.row-actions > *:last-child {
+    margin-right: 0;
+}
+
+.btn-link-danger {
+    padding: 0;
+    color: #a94442;
+    vertical-align: baseline;
+}
+
+.status-label {
+    display: inline-block;
+    padding: 3px 8px;
+    color: #52636b;
+    background: #e9edef;
+    border-radius: 2px;
+}
+
+.status-open {
+    color: #8c382f;
+    background: #f6e7e4;
+}
+
+.status-closed {
+    color: #27645d;
+    background: #e3f0ec;
+}
+
+.report-tool {
+    max-width: 760px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #d8e1e4;
+}
+
+.report-tool legend {
+    margin-bottom: 8px;
+    border: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.report-tool .form-group {
+    margin-bottom: 16px;
+}
+
+.report-timing {
+    margin-left: 12px;
+    color: #607681;
+}
+
+.report-list {
+    margin-top: 20px;
+}
+
+.detail-list {
+    display: grid;
+    max-width: 760px;
+    grid-template-columns: 160px minmax(0, 1fr);
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #d8e1e4;
+}
+
+.detail-list dt,
+.detail-list dd {
+    padding: 9px 0;
+    border-bottom: 1px solid #e8edef;
+}
+
+.detail-list dt:last-of-type,
+.detail-list dd:last-of-type {
+    border-bottom: 0;
+}
+
+.heading-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.login-page {
+    min-height: 100vh;
+    background: #eaf0f1;
+}
+
+.login-shell {
+    display: grid;
+    width: min(840px, calc(100% - 30px));
+    grid-template-columns: 1fr 1fr;
+    margin: 10vh auto 40px;
+    background: #ffffff;
+    border: 1px solid #d8e1e4;
+}
+
+.login-brand {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 42px 34px;
+    color: #ffffff;
+    background: #173b4d;
+}
+
+.login-brand h1,
+.login-brand .eyebrow {
+    color: #ffffff;
+}
+
+.login-brand .text-muted {
+    color: #d2e0e4;
+}
+
+.login-mark {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+    color: #173b4d;
+    background: #d4e7df;
+    font-weight: 700;
+}
+
+.login-panel {
+    padding: 42px 34px;
+}
+
+@media (max-width: 767px) {
+    .body-content {
+        padding-top: 60px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .job-picker {
+        align-items: stretch;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .job-picker select {
+        width: 100%;
+        max-width: none;
+    }
+
+    .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .filter-bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .filter-bar .form-control {
+        width: 100%;
+    }
+
+    .form-surface {
+        padding: 16px 12px 6px;
+    }
+
+    .form-surface .control-label {
+        padding-bottom: 5px;
+        text-align: left;
+    }
+
+    .form-actions {
+        margin-left: 0;
+    }
+
+    .login-shell {
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+    }
+
+    .login-brand,
+    .login-panel {
+        padding: 26px 22px;
+    }
+}
+
+@media (max-width: 420px) {
+    .metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-list {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-list dd {
+        padding-top: 0;
+    }
+
+    .heading-actions {
+        flex-wrap: wrap;
+    }
+}

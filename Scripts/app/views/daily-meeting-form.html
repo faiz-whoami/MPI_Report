@@ -1,0 +1,10 @@
+<section class="app-page form-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Job meeting</p><h1>Add daily meeting</h1></div><a class="btn btn-default" href="#/daily-meetings">Back to meetings</a></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <form name="meetingForm" class="form-horizontal form-surface" ng-submit="vm.save()" novalidate>
+        <div class="form-group"><label class="col-sm-3 control-label" for="meeting-date">Date</label><div class="col-sm-7"><input class="form-control" id="meeting-date" type="date" ng-model="vm.meeting.MeetingDate" /></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="meeting-description">Description</label><div class="col-sm-7"><textarea class="form-control" id="meeting-description" rows="5" maxlength="250" ng-model="vm.meeting.Description"></textarea></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="meeting-signatures">Signatures</label><div class="col-sm-7"><input class="form-control" id="meeting-signatures" maxlength="250" ng-model="vm.meeting.Signatures" /></div></div>
+        <div class="form-actions col-sm-offset-3"><button class="btn btn-primary" type="submit">Save meeting</button><a class="btn btn-link" href="#/daily-meetings">Cancel</a></div>
+    </form>
+</section>

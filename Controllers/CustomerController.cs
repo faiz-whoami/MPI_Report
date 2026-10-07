@@ -15,53 +15,25 @@ namespace MPI_Report.Controllers
         }
 
         // GET: Customer
-        public async Task<ActionResult> Index(
+        public ActionResult Index(
             string search,
             string status)
         {
-            if (string.IsNullOrWhiteSpace(status))
-            {
-                status = "active";
-            }
-
-            var customers =
-                await _customerService.SearchAsync(search, status);
-
-            //var model = new CustomerListViewModel
-            //{
-            //    Search = search,
-            //    Status = status,
-            //    Items = customers
-            //};
-
-            return View();
+            return Redirect(Url.Content("~/index.html") + "#/customers");
         }
 
 
         // GET: Customer/Details/5
-        public async Task<ActionResult> Details(int id)
+        public ActionResult Details(int id)
         {
-            var customer =
-                await _customerService.GetByIdAsync(id);
-
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
+            return Redirect(Url.Content("~/index.html") + "#/customers/" + id);
         }
 
 
         // GET: Customer/Create
         public ActionResult Create()
         {
-            var model = new CustomerFormViewModel
-            {
-                IsActive = true
-            };
-
-            return View(model);
+            return Redirect(Url.Content("~/index.html") + "#/customers/create");
         }
 
 
@@ -73,7 +45,7 @@ namespace MPI_Report.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Failure("Please correct the customer details.", 400);
             }
 
             int customerId =
@@ -81,29 +53,17 @@ namespace MPI_Report.Controllers
 
             if (customerId <= 0)
             {
-                ModelState.AddModelError(
-                    "",
-                    "Unable to create the customer.");
-
-                return View(model);
+                return Failure("Unable to create the customer.", 400);
             }
 
-            return RedirectToAction("Index");
+            return Json(new { success = true, customerId });
         }
 
 
         // GET: Customer/Edit/5
-        public async Task<ActionResult> Edit(int id)
+        public ActionResult Edit(int id)
         {
-            var customer =
-                await _customerService.GetByIdAsync(id);
-
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
+            return Redirect(Url.Content("~/index.html") + "#/customers/" + id + "/edit");
         }
 
 
@@ -115,7 +75,7 @@ namespace MPI_Report.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Failure("Please correct the customer details.", 400);
             }
 
             bool updated =
@@ -123,10 +83,10 @@ namespace MPI_Report.Controllers
 
             if (!updated)
             {
-                return HttpNotFound();
+                return Failure("Customer was not found.", 404);
             }
 
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
 
@@ -140,10 +100,17 @@ namespace MPI_Report.Controllers
 
             if (!deleted)
             {
-                return HttpNotFound();
+                return Failure("Customer was not found.", 404);
             }
 
-            return RedirectToAction("Index");
+            return Json(new { success = true });
+        }
+
+        private ActionResult Failure(string message, int statusCode)
+        {
+            Response.StatusCode = statusCode;
+            Response.TrySkipIisCustomErrors = true;
+            return Json(new { message });
         }
     }
 }

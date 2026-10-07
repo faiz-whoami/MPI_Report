@@ -2,7 +2,6 @@
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
 using MPI_Report.Services.Interfaces;
-using MPI_Report.ViewModels;
 
 namespace MPI_Report.Controllers
 {
@@ -16,22 +15,10 @@ namespace MPI_Report.Controllers
             _platformService = platformService;
         }
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            int? jobId = JobContext.GetJobId(Session);
-            DashboardCounts counts = _platformService.GetDashboardCounts(jobId);
-
-            DashboardViewModel model = new DashboardViewModel();
-            model.SelectedJobId = jobId;
-            model.SelectedJobNo = JobContext.GetJobNo(Session);
-            model.Jobs = _platformService.GetActiveJobs();
-            model.InventoryCount = counts.InventoryCount;
-            model.OpenCorrectiveActionCount = counts.OpenCorrectiveActionCount;
-            model.DailyMeetingCount = counts.DailyMeetingCount;
-            model.ChecklistCount = counts.ChecklistCount;
-            model.MpiReportCount = counts.MpiReportCount;
-
-            return View(model);
+            return Redirect(Url.Content("~/index.html"));
         }
 
         [HttpPost]
@@ -41,12 +28,12 @@ namespace MPI_Report.Controllers
             Job job = _platformService.GetJobById(jobId);
             if (job == null)
             {
-                TempData["Message"] = "Job was not found.";
-                return RedirectToAction("Index");
+                Response.StatusCode = 404;
+                return Json(new { message = "Job was not found." });
             }
 
             JobContext.Set(Session, job.JobId, job.JobNo, job.CustomerId, job.RigId);
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
     }
 }

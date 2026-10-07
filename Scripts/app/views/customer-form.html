@@ -1,0 +1,12 @@
+<section class="app-page form-page" ng-cloak>
+    <header class="page-heading"><div><p class="eyebrow">Customer directory</p><h1>{{ vm.isEdit ? 'Edit customer' : 'Add customer' }}</h1></div><a class="btn btn-default" href="#/customers">Back to customers</a></header>
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <form name="customerForm" class="form-horizontal form-surface" ng-submit="vm.save()" novalidate>
+        <div class="form-group" ng-class="{'has-error': vm.errors.Name}"><label class="col-sm-3 control-label" for="customer-name">Customer name</label><div class="col-sm-7"><input class="form-control" id="customer-name" ng-model="vm.customer.Name" maxlength="150" required /><span class="field-error" ng-repeat="message in vm.errors.Name">{{ message }}</span></div></div>
+        <div class="form-group" ng-class="{'has-error': vm.errors.Email}"><label class="col-sm-3 control-label" for="customer-email">Email</label><div class="col-sm-7"><input class="form-control" id="customer-email" type="email" ng-model="vm.customer.Email" maxlength="150" /><span class="field-error" ng-repeat="message in vm.errors.Email">{{ message }}</span></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="customer-phone">Phone</label><div class="col-sm-7"><input class="form-control" id="customer-phone" ng-model="vm.customer.Phone" maxlength="30" /><span class="field-error" ng-repeat="message in vm.errors.Phone">{{ message }}</span></div></div>
+        <div class="form-group"><label class="col-sm-3 control-label" for="customer-address">Address</label><div class="col-sm-7"><textarea class="form-control" id="customer-address" rows="3" ng-model="vm.customer.Address" maxlength="250"></textarea><span class="field-error" ng-repeat="message in vm.errors.Address">{{ message }}</span></div></div>
+        <div class="form-group"><div class="col-sm-offset-3 col-sm-7"><label class="checkbox-inline"><input type="checkbox" ng-model="vm.customer.IsActive" /> Active</label></div></div>
+        <div class="form-actions col-sm-offset-3"><button class="btn btn-primary" type="submit" ng-disabled="customerForm.$invalid">Save customer</button><a class="btn btn-link" href="#/customers">Cancel</a></div>
+    </form>
+</section>

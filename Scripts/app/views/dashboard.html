@@ -1,0 +1,28 @@
+<section class="app-page" ng-cloak>
+    <header class="page-heading">
+        <div>
+            <p class="eyebrow">Overview</p>
+            <h1>Dashboard</h1>
+            <p class="text-muted" ng-if="vm.dashboard.selectedJobNo">Current job: {{ vm.dashboard.selectedJobNo }}</p>
+            <p class="text-muted" ng-if="!vm.dashboard.selectedJobNo">Select a client, rig, and job to open its workspace.</p>
+        </div>
+        <form class="job-picker form-inline" ng-submit="vm.selectJob()">
+            <label for="job-picker">Client / Rig / Job</label>
+            <select class="form-control" id="job-picker" ng-model="vm.selectedJobId" ng-options="job.JobId as (job.CustomerName + ' / ' + job.RigName + ' / ' + job.JobNo) for job in vm.dashboard.jobs">
+                <option value="">Select a job</option>
+            </select>
+            <button class="btn btn-primary" type="submit" ng-disabled="!vm.selectedJobId">Open job</button>
+        </form>
+    </header>
+
+    <div class="alert alert-danger" ng-if="vm.error">{{ vm.error }}</div>
+    <div class="loading-state" ng-if="vm.loading">Loading dashboard...</div>
+
+    <div class="metric-grid" ng-if="!vm.loading">
+        <a class="metric" href="#/inventory"><span class="metric-label">Inventory</span><strong>{{ vm.dashboard.InventoryCount }}</strong><span class="metric-link">View items</span></a>
+        <a class="metric metric-alert" href="#/corrective-actions"><span class="metric-label">Open corrective actions</span><strong>{{ vm.dashboard.OpenCorrectiveActionCount }}</strong><span class="metric-link">Review actions</span></a>
+        <a class="metric" href="#/daily-meetings"><span class="metric-label">Daily meetings</span><strong>{{ vm.dashboard.DailyMeetingCount }}</strong><span class="metric-link">View meetings</span></a>
+        <a class="metric" href="#/checklists"><span class="metric-label">Checklists</span><strong>{{ vm.dashboard.ChecklistCount }}</strong><span class="metric-link">View checklists</span></a>
+        <a class="metric" href="#/reports"><span class="metric-label">MPI reports</span><strong>{{ vm.dashboard.MpiReportCount }}</strong><span class="metric-link">View reports</span></a>
+    </div>
+</section>
