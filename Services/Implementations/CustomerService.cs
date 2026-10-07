@@ -12,9 +12,9 @@ namespace MPI_Report.Services.Implementations
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public CustomerService(ICustomerRepository customerRepository, Mapper mapper)
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
