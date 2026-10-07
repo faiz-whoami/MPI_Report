@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
 using MPI_Report.Services.Interfaces;
@@ -24,7 +25,15 @@ namespace MPI_Report.Controllers
             DashboardViewModel model = new DashboardViewModel();
             model.SelectedJobId = jobId;
             model.SelectedJobNo = JobContext.GetJobNo(Session);
-            model.Jobs = _platformService.GetActiveJobs();
+            model.Jobs = _platformService.GetActiveJobs()
+                .Select(job => new DashboardJobViewModel
+                {
+                    JobId = job.JobId,
+                    JobNo = job.JobNo,
+                    CustomerName = job.Customer != null ? job.Customer.Name : string.Empty,
+                    RigName = job.Rig != null ? job.Rig.Name : string.Empty
+                })
+                .ToList();
             model.InventoryCount = counts.InventoryCount;
             model.OpenCorrectiveActionCount = counts.OpenCorrectiveActionCount;
             model.DailyMeetingCount = counts.DailyMeetingCount;

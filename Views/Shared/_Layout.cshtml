@@ -1,11 +1,15 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Inspections Track</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/app/services/home-service.js"></script>
+    <script src="~/Scripts/app/controllers/home-controller.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

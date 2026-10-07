@@ -24,8 +24,8 @@ namespace MPI_Report.Controllers
                 status = "active";
             }
 
-            var customers =
-                await _customerService.SearchAsync(search, status);
+            //var customers =
+            //    await _customerService.SearchAsync(search, status);
 
             //var model = new CustomerListViewModel
             //{
