@@ -1,0 +1,205 @@
+﻿/* =========================================
+   DASHBOARD
+   ========================================= */
+
+.dashboard-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+	.dashboard-heading h1 {
+		margin: 0;
+		font-size: 25px;
+		font-weight: 600;
+		color: #111827;
+	}
+
+	.dashboard-heading p {
+		margin: 6px 0 0;
+		color: #6b7280;
+		font-size: 13px;
+	}
+
+
+/* JOB TOOLBAR */
+
+.dashboard-toolbar {
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 18px 20px;
+	margin-bottom: 20px;
+}
+
+.job-selector-form {
+	display: flex;
+	align-items: flex-end;
+	gap: 12px;
+}
+
+	.job-selector-form .form-group {
+		margin: 0;
+		flex: 1;
+		max-width: 600px;
+	}
+
+	.job-selector-form label {
+		font-size: 12px;
+		font-weight: 600;
+		color: #374151;
+		margin-bottom: 6px;
+	}
+
+	.job-selector-form select {
+		height: 40px;
+		border-color: #d1d5db;
+		box-shadow: none;
+	}
+
+.dashboard-fetch-btn {
+	height: 40px;
+	padding-left: 18px;
+	padding-right: 18px;
+}
+
+
+/* CURRENT JOB */
+
+.current-job {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	background: #eff6ff;
+	border: 1px solid #dbeafe;
+	border-radius: 8px;
+	padding: 13px 16px;
+	margin-bottom: 20px;
+	color: #1d4ed8;
+}
+
+	.current-job > .glyphicon {
+		font-size: 18px;
+	}
+
+.current-job-label {
+	display: block;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+	color: #60a5fa;
+}
+
+.current-job strong {
+	display: block;
+	margin-top: 2px;
+	font-size: 13px;
+	color: #1e40af;
+}
+
+
+/* STATISTICS */
+
+.dashboard-stat-grid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.stat-card {
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 18px;
+	display: flex;
+	align-items: center;
+	min-height: 105px;
+	transition: transform .15s ease, box-shadow .15s ease;
+}
+
+	.stat-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(0,0,0,.06);
+	}
+
+.stat-icon {
+	width: 45px;
+	height: 45px;
+	border-radius: 9px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 13px;
+	font-size: 17px;
+}
+
+.stat-icon-blue {
+	background: #eff6ff;
+	color: #2563eb;
+}
+
+.stat-icon-red {
+	background: #fef2f2;
+	color: #dc2626;
+}
+
+.stat-icon-green {
+	background: #f0fdf4;
+	color: #16a34a;
+}
+
+.stat-icon-orange {
+	background: #fff7ed;
+	color: #ea580c;
+}
+
+.stat-icon-purple {
+	background: #faf5ff;
+	color: #9333ea;
+}
+
+.stat-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.stat-label {
+	color: #6b7280;
+	font-size: 11px;
+	line-height: 1.4;
+}
+
+.stat-value {
+	color: #111827;
+	font-size: 24px;
+	margin-top: 4px;
+}
+
+
+/* LOADING */
+
+.dashboard-loading {
+	background: #ffffff;
+	padding: 30px;
+	border-radius: 10px;
+	text-align: center;
+	color: #6b7280;
+}
+
+.spinning {
+	display: inline-block;
+	animation: spin 1s linear infinite;
+	margin-right: 6px;
+}
+
+@keyframes spin {
+
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

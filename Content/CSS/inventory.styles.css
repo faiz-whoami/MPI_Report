@@ -1,0 +1,270 @@
+﻿/* ================================
+   INVENTORY PAGE
+   ================================ */
+
+.page-header-section {
+    margin-bottom: 25px;
+}
+
+.page-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    margin: 0 0 6px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.page-title-icon {
+    margin-right: 8px;
+    font-size: 22px;
+    color: #337ab7;
+}
+
+.page-description {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.page-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* ================================
+   INVENTORY CARD
+   ================================ */
+
+.inventory-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.inventory-card-header {
+    min-height: 75px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.inventory-card-title {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.inventory-card-subtitle {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.inventory-count {
+    text-align: right;
+}
+
+.inventory-count-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.inventory-count-label {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+
+/* ================================
+   TABLE
+   ================================ */
+
+.inventory-table-wrapper {
+    overflow-x: auto;
+}
+
+.inventory-table {
+    margin: 0;
+}
+
+    .inventory-table thead th {
+        padding: 14px 20px;
+        border-top: none;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f9fafb;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        white-space: nowrap;
+    }
+
+    .inventory-table tbody td {
+        padding: 16px 20px;
+        vertical-align: middle;
+        border-top: 1px solid #f0f1f3;
+        color: #374151;
+        font-size: 14px;
+    }
+
+    .inventory-table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+.item-code {
+    font-weight: 600;
+    color: #337ab7;
+}
+
+.item-description {
+    font-weight: 500;
+    color: #111827;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #eef6ff;
+    color: #337ab7;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   EMPTY STATE
+   ================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 55px 20px;
+    color: #6b7280;
+}
+
+    .empty-state .glyphicon {
+        font-size: 38px;
+        margin-bottom: 15px;
+        color: #9ca3af;
+    }
+
+    .empty-state h4 {
+        margin: 0 0 8px 0;
+        color: #374151;
+    }
+
+    .empty-state p {
+        margin-bottom: 20px;
+    }
+
+
+/* ================================
+   FORM CARD
+   ================================ */
+
+.form-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.form-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+    .form-card-header h4 {
+        margin: 0 0 5px 0;
+        font-size: 17px;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .form-card-header p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+.form-card-body {
+    padding: 25px;
+}
+
+.form-card .form-group {
+    margin-bottom: 20px;
+}
+
+.form-card .control-label {
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-card .form-control {
+    height: 40px;
+    border-radius: 5px;
+    border-color: #d1d5db;
+    box-shadow: none;
+}
+
+    .form-card .form-control:focus {
+        border-color: #337ab7;
+        box-shadow: 0 0 0 2px rgba(51, 122, 183, 0.08);
+    }
+
+.form-card-footer {
+    padding: 18px 25px;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+    text-align: right;
+}
+
+    .form-card-footer .btn {
+        margin-left: 6px;
+    }
+
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 767px) {
+
+    .page-header-content {
+        display: block;
+    }
+
+    .page-header-actions {
+        margin-top: 15px;
+    }
+
+    .inventory-card-header {
+        align-items: flex-start;
+    }
+
+    .inventory-table thead th,
+    .inventory-table tbody td {
+        padding: 12px 14px;
+    }
+
+    .form-card-body {
+        padding: 20px;
+    }
+}

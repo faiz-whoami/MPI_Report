@@ -3,64 +3,242 @@
 }
 
 <div ng-controller="homeController">
-    <h2>Dashboard</h2>
-    <p class="text-muted">
-        Select a job, then open inventory, checklists, corrective actions, meetings, or MPI PDF reports.
-    </p>
 
-    <div class="alert alert-danger" ng-if="loadError">
-        {{ loadError }}
+    <!-- DASHBOARD HEADER -->
+
+    <div class="dashboard-heading">
+
+        <div>
+
+            <h1>Dashboard</h1>
+
+        </div>
+
     </div>
 
-    <div ng-if="isLoading" class="text-muted">
+
+    <!-- JOB SELECTOR -->
+
+    <div class="dashboard-toolbar">
+
+        <form ng-if="!isLoading && !loadError"
+              ng-submit="selectJob()"
+              class="job-selector-form">
+
+            <div class="form-group">
+
+                <label for="jobId">
+                    Current Job
+                </label>
+
+                <select id="jobId"
+                        class="form-control"
+                        ng-model="selectedJobId"
+                        required>
+
+                    <option value="">
+                        -- Select job --
+                    </option>
+
+                    <option ng-repeat="job in dashboard.Jobs"
+                            value="{{job.JobId}}">
+
+                        {{job.CustomerName + ' / ' + job.RigName + ' / ' + job.JobNo}}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary dashboard-fetch-btn">
+
+                <span class="glyphicon glyphicon-refresh"></span>
+
+                Fetch Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div ng-if="isLoading"
+         class="dashboard-loading">
+
+        <span class="glyphicon glyphicon-refresh spinning"></span>
+
         Loading dashboard...
+
     </div>
 
-    <form ng-if="!isLoading && !loadError" class="form-inline" ng-submit="selectJob()" style="margin-bottom: 20px;">
-        <div class="form-group">
-            <label for="jobId">Client / Rig / Job</label>
-            <select id="jobId" class="form-control" ng-model="selectedJobId" required>
-                <option value="">-- Select job --</option>
-                <option ng-repeat="job in dashboard.Jobs" value="{{job.JobId}}">
-                    {{job.CustomerName + ' / ' + job.RigName + ' / ' + job.JobNo}}
-                </option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Fetch data</button>
-    </form>
 
-    <p ng-if="dashboard.SelectedJobNo"><strong>Current job:</strong> {{dashboard.SelectedJobNo}}</p>
+    <!-- ERROR -->
 
-    <div ng-if="!isLoading && !loadError" class="row">
-        <div class="col-md-2">
-            <div class="panel panel-info">
-                <div class="panel-heading">Inventory</div>
-                <div class="panel-body"><h3>{{dashboard.InventoryCount}}</h3></div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="panel panel-danger">
-                <div class="panel-heading">Open CAs</div>
-                <div class="panel-body"><h3>{{dashboard.OpenCorrectiveActionCount}}</h3></div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="panel panel-success">
-                <div class="panel-heading">Meetings</div>
-                <div class="panel-body"><h3>{{dashboard.DailyMeetingCount}}</h3></div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-warning">
-                <div class="panel-heading">Checklists</div>
-                <div class="panel-body"><h3>{{dashboard.ChecklistCount}}</h3></div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">MPI Reports</div>
-                <div class="panel-body"><h3>{{dashboard.MpiReportCount}}</h3></div>
-            </div>
-        </div>
+    <div ng-if="loadError"
+         class="alert alert-danger">
+
+        {{ loadError }}
+
     </div>
+
+
+    <!-- CURRENT JOB -->
+
+    <div ng-if="dashboard.SelectedJobNo"
+         class="current-job">
+
+        <span class="glyphicon glyphicon-briefcase"></span>
+
+        <div>
+
+            <span class="current-job-label">
+                Current Job
+            </span>
+
+            <strong>
+                {{dashboard.SelectedJobNo}}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div ng-if="!isLoading && !loadError"
+         class="dashboard-stat-grid">
+
+
+        <!-- INVENTORY -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-icon-blue">
+
+                <span class="glyphicon glyphicon-th-large"></span>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Inventory
+                </span>
+
+                <strong class="stat-value">
+                    {{dashboard.InventoryCount}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CORRECTIVE ACTIONS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-icon-red">
+
+                <span class="glyphicon glyphicon-warning-sign"></span>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Open Corrective Actions
+                </span>
+
+                <strong class="stat-value">
+                    {{dashboard.OpenCorrectiveActionCount}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- MEETINGS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-icon-green">
+
+                <span class="glyphicon glyphicon-calendar"></span>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Daily Meetings
+                </span>
+
+                <strong class="stat-value">
+                    {{dashboard.DailyMeetingCount}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHECKLISTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-icon-orange">
+
+                <span class="glyphicon glyphicon-check"></span>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    Checklists
+                </span>
+
+                <strong class="stat-value">
+                    {{dashboard.ChecklistCount}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- MPI REPORTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-icon-purple">
+
+                <span class="glyphicon glyphicon-file"></span>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span class="stat-label">
+                    MPI Reports
+                </span>
+
+                <strong class="stat-value">
+                    {{dashboard.MpiReportCount}}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>

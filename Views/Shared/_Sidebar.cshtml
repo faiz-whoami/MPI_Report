@@ -1,0 +1,162 @@
+﻿<aside class="app-sidebar" id="appSidebar">
+
+    <!-- BRAND -->
+    <div class="sidebar-brand">
+
+        <div class="brand-logo">
+            IT
+        </div>
+
+        <div class="brand-content">
+
+            <span class="brand-name">
+                Inspections
+            </span>
+
+            <span class="brand-subtitle">
+                TRACK
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <nav class="sidebar-navigation">
+
+        <div class="sidebar-section-title">
+            MAIN
+        </div>
+
+
+        <!-- DASHBOARD -->
+        <a href="@Url.Action("Index", "Home")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-dashboard"></span>
+
+            <span class="sidebar-link-text">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- INVENTORY -->
+        <a href="@Url.Action("Index", "Inventory")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-th-large"></span>
+
+            <span class="sidebar-link-text">
+                Inventory
+            </span>
+
+        </a>
+
+
+        <!-- CHECKLISTS -->
+        <a href="@Url.Action("Index", "Checklist")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-check"></span>
+
+            <span class="sidebar-link-text">
+                Checklists
+            </span>
+
+        </a>
+
+
+        <!-- CORRECTIVE ACTIONS -->
+        <a href="@Url.Action("Index", "CorrectiveAction")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-warning-sign"></span>
+
+            <span class="sidebar-link-text">
+                Corrective Actions
+            </span>
+
+        </a>
+
+
+        <!-- DAILY MEETINGS -->
+        <a href="@Url.Action("Index", "DailyMeeting")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-calendar"></span>
+
+            <span class="sidebar-link-text">
+                Daily Meetings
+            </span>
+
+        </a>
+
+
+        <div class="sidebar-section-title sidebar-section-spaced">
+            REPORTING
+        </div>
+
+
+        <!-- MPI REPORTS -->
+        <a href="@Url.Action("Index", "Report")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-file"></span>
+
+            <span class="sidebar-link-text">
+                MPI Reports
+            </span>
+
+        </a>
+
+
+        <!-- CUSTOMERS -->
+        <a href="@Url.Action("Index", "Customer")"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-user"></span>
+
+            <span class="sidebar-link-text">
+                Customers
+            </span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- BOTTOM -->
+    <div class="sidebar-bottom">
+
+        <a href="#"
+           class="sidebar-link">
+
+            <span class="sidebar-icon glyphicon glyphicon-cog"></span>
+
+            <span class="sidebar-link-text">
+                Settings
+            </span>
+
+        </a>
+
+
+        @if (Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Logout", "Account")"
+               class="sidebar-link logout-link">
+
+                <span class="sidebar-icon glyphicon glyphicon-log-out"></span>
+
+                <span class="sidebar-link-text">
+                    Logout
+                </span>
+
+            </a>
+        }
+
+    </div>
+
+</aside>

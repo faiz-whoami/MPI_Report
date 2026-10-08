@@ -1,34 +1,175 @@
 @model IEnumerable<MPI_Report.Models.InventoryItem>
 
 @{
-    ViewBag.Title = "Item Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Inventory";
 }
 
-<h2>Item Inventory</h2>
-<p>@Html.ActionLink("Add item", "Create", null, new { @class = "btn btn-primary" })</p>
+<div class="page-header-section">
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Code</th>
-            <th>Description</th>
-            <th>Position</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Special type</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ItemCode</td>
-                <td>@item.Description</td>
-                <td>@item.Position</td>
-                <td>@item.ItemType</td>
-                <td>@item.Status</td>
-                <td>@item.SpecialType</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="page-header-content">
+
+        <div>
+            <h2 class="page-title">
+                <span class="glyphicon glyphicon-th-large page-title-icon"></span>
+                Inventory
+            </h2>
+
+            <p class="page-description">
+                Manage inspection items and their current status.
+            </p>
+        </div>
+
+        <div class="page-header-actions">
+            @Html.ActionLink(
+                " Add Item",
+                "Create",
+                "Inventory",
+                null,
+                new
+                {
+                    @class = "btn btn-primary"
+                })
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="inventory-card">
+
+    <div class="inventory-card-header">
+
+        <div>
+            <h4 class="inventory-card-title">Item Inventory</h4>
+            <span class="inventory-card-subtitle">
+                List of available inventory items
+            </span>
+        </div>
+
+        <div class="inventory-count">
+
+            <span class="inventory-count-number">
+                @(Model == null ? 0 : Model.Count())
+            </span>
+
+            <span class="inventory-count-label">
+                Items
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="inventory-table-wrapper">
+
+        <table class="table inventory-table">
+
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Position</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Special Type</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <span class="item-code">
+                                    @item.ItemCode
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="item-description">
+                                    @item.Description
+                                </span>
+                            </td>
+
+                            <td>
+                                @item.Position
+                            </td>
+
+                            <td>
+                                @item.ItemType
+                            </td>
+
+                            <td>
+
+                                @if (!String.IsNullOrEmpty(item.Status))
+                                {
+                                    <span class="status-badge">
+                                        @item.Status
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+
+                            </td>
+
+                            <td>
+                                @if (!String.IsNullOrEmpty(item.SpecialType))
+                                {
+                                    @item.SpecialType
+                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+
+                            <div class="empty-state">
+
+                                <span class="glyphicon glyphicon-inbox"></span>
+
+                                <h4>No inventory items</h4>
+
+                                <p>
+                                    There are currently no inventory items.
+                                </p>
+
+                                @Html.ActionLink(
+                                    "Add your first item",
+                                    "Create",
+                                    "Inventory",
+                                    null,
+                                    new
+                                    {
+                                        @class = "btn btn-primary"
+                                    })
+
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

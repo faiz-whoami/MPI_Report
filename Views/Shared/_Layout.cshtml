@@ -1,61 +1,71 @@
 ﻿<!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
+
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>@ViewBag.Title - Inspections Track</title>
+
     @Styles.Render("~/Content/css")
+
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/app/app.js"></script>
-    <script src="~/Scripts/app/services/homeService.js"></script>
-    <script src="~/Scripts/app/controllers/homeController.js"></script>
+
+    <link href="~/Content/CSS/dashboard-layout.css" rel="stylesheet" />
+    <link href="~/Content/CSS/home.style.css" rel="stylesheet" />
+    <link href="~/Content/CSS/inventory.styles.css" rel="stylesheet" />
+
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Inspections Track", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <div class="app-layout">
+
+        <!-- HEADER -->
+        @Html.Partial("_Header")
+
+
+        <!-- SIDEBAR -->
+        @Html.Partial("_Sidebar")
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <div class="content-container">
+
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-info dashboard-alert">
+                        @TempData["Message"]
+                    </div>
+                }
+
+                @RenderBody()
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
-                    <li>@Html.ActionLink("Checklists", "Index", "Checklist")</li>
-                    <li>@Html.ActionLink("Corrective Actions", "Index", "CorrectiveAction")</li>
-                    <li>@Html.ActionLink("Daily Meetings", "Index", "DailyMeeting")</li>
-                    <li>@Html.ActionLink("MPI Reports", "Index", "Report")</li>
-                    <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li><a href="#">@User.Identity.Name</a></li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @if (TempData["Message"] != null)
-        {
-            <div class="alert alert-info" style="margin-top: 15px;">@TempData["Message"]</div>
-        }
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Sky Soft Connections / Inspections Track</p>
-        </footer>
+
+        </main>
+
     </div>
 
+
     @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/app/app.js"></script>
+
+    <script src="~/Scripts/app/services/homeService.js"></script>
+
+    <script src="~/Scripts/app/controllers/homeController.js"></script>
+
     @RenderSection("scripts", required: false)
+
 </body>
+
 </html>

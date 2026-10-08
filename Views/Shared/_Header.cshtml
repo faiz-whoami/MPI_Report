@@ -1,0 +1,64 @@
+﻿<header class="app-header">
+
+    <div class="header-left">
+
+        @*<button type="button"
+                class="sidebar-toggle"
+                id="sidebarToggle">
+
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+
+        </button>*@
+
+        <div class="header-page-title">
+
+            <span class="header-title">
+                @ViewBag.Title
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <button class="header-icon-button"
+                type="button"
+                title="Notifications">
+
+            <span class="glyphicon glyphicon-bell"></span>
+
+            <span class="notification-dot"></span>
+
+        </button>
+
+
+        @if (Request.IsAuthenticated)
+        {
+            <div class="header-user">
+
+                <div class="user-avatar">
+                    @User.Identity.Name.Substring(0, 1).ToUpper()
+                </div>
+
+                <div class="user-details">
+
+                    <span class="user-name">
+                        @User.Identity.Name
+                    </span>
+
+                    <span class="user-role">
+                        Admin
+                    </span>
+
+                </div>
+
+                <span class="glyphicon glyphicon-chevron-down user-arrow"></span>
+
+            </div>
+        }
+
+    </div>
+
+</header>

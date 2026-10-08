@@ -24,7 +24,8 @@ namespace MPI_Report.Controllers
                 return redirect;
             }
 
-            IList<InventoryItem> items = _platformService.GetInventory(JobContext.GetJobId(Session).Value);
+            IList<InventoryItem> items = _platformService.GetInventory(1);
+            System.Diagnostics.Debug.WriteLine("These are our Items",items);
             return View(items);
         }
 

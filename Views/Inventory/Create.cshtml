@@ -1,46 +1,258 @@
 @model MPI_Report.Models.InventoryItem
 
 @{
-    ViewBag.Title = "Add inventory item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Inventory Item";
 }
 
-<h2>Add inventory item</h2>
+<div class="page-header-section">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="page-header-content">
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ItemCode)
-        @Html.TextBoxFor(m => m.ItemCode, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description)
-        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Position)
-        @Html.TextBoxFor(m => m.Position, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ItemType)
-        @Html.TextBoxFor(m => m.ItemType, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Status)
-        @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.SpecialType)
-        @Html.TextBoxFor(m => m.SpecialType, new { @class = "form-control" })
+        <div>
+
+            <h2 class="page-title">
+                <span class="glyphicon glyphicon-plus page-title-icon"></span>
+                Add Inventory Item
+            </h2>
+
+            <p class="page-description">
+                Add a new item to the inspection inventory.
+            </p>
+
+        </div>
+
+        <div class="page-header-actions">
+
+            @Html.ActionLink(
+                " Back to Inventory",
+                "Index",
+                "Inventory",
+                null,
+                new
+                {
+                    @class = "btn btn-default"
+                })
+
+        </div>
+
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
-}
+</div>
+
+
+<div class="form-card">
+
+    <div class="form-card-header">
+
+        <h4>Item Information</h4>
+
+        <p>
+            Enter the details of the inventory item below.
+        </p>
+
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(
+            true,
+            "",
+            new
+            {
+                @class = "alert alert-danger"
+            })
+
+
+        <div class="form-card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(
+                            m => m.ItemCode,
+                            new { @class = "control-label" })
+
+                        @Html.TextBoxFor(
+                            m => m.ItemCode,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter item code"
+                            })
+
+                        @Html.ValidationMessageFor(
+                            m => m.ItemCode,
+                            "",
+                            new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(
+                            m => m.Position,
+                            new { @class = "control-label" })
+
+                        @Html.TextBoxFor(
+                            m => m.Position,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter position"
+                            })
+
+                        @Html.ValidationMessageFor(
+                            m => m.Position,
+                            "",
+                            new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                @Html.LabelFor(
+                    m => m.Description,
+                    new { @class = "control-label" })
+
+                @Html.TextBoxFor(
+                    m => m.Description,
+                    new
+                    {
+                        @class = "form-control",
+                        placeholder = "Enter item description"
+                    })
+
+                @Html.ValidationMessageFor(
+                    m => m.Description,
+                    "",
+                    new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(
+                            m => m.ItemType,
+                            new { @class = "control-label" })
+
+                        @Html.TextBoxFor(
+                            m => m.ItemType,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter item type"
+                            })
+
+                        @Html.ValidationMessageFor(
+                            m => m.ItemType,
+                            "",
+                            new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(
+                            m => m.SpecialType,
+                            new { @class = "control-label" })
+
+                        @Html.TextBoxFor(
+                            m => m.SpecialType,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter special type"
+                            })
+
+                        @Html.ValidationMessageFor(
+                            m => m.SpecialType,
+                            "",
+                            new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                @Html.LabelFor(
+                    m => m.Status,
+                    new { @class = "control-label" })
+
+                @Html.TextBoxFor(
+                    m => m.Status,
+                    new
+                    {
+                        @class = "form-control",
+                        placeholder = "Enter status"
+                    })
+
+                @Html.ValidationMessageFor(
+                    m => m.Status,
+                    "",
+                    new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+
+        <div class="form-card-footer">
+
+            @Html.ActionLink(
+                "Cancel",
+                "Index",
+                "Inventory",
+                null,
+                new
+                {
+                    @class = "btn btn-default"
+                })
+
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+                Save Item
+            </button>
+
+        </div>
+
+    }
+
+</div>
+
 
 @section scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
+
 }

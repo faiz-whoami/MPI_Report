@@ -217,6 +217,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\dashboard-layout.css" />
+    <Content Include="Content\CSS\inventory.styles.css" />
     <Content Include="Content\CSS\login.style.css" />
     <Content Include="Data\StoredProcedures\GetInspectionReport.sql" />
     <Content Include="favicon.ico" />
@@ -275,6 +277,7 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Content\CSS\home.style.css" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -1066,6 +1069,8 @@
     <Content Include="Views\DailyMeeting\Create.cshtml" />
     <Content Include="Docs\DatabaseAndDeployment.md" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

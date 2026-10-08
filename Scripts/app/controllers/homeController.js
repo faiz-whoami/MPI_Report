@@ -30,8 +30,7 @@
         if (!$scope.selectedJobId) {
             return;
         }
-
-        homeService.selectJob(
+     homeService.selectJob(
             $scope.dashboard.SelectJobUrl,
             $scope.selectedJobId,
             $scope.antiForgeryToken
