@@ -249,8 +249,10 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\controllers\home-controller.js" />
-    <Content Include="Scripts\app\services\home-service.js" />
+    <Content Include="Scripts\app\controllers\accountController.js" />
+    <Content Include="Scripts\app\controllers\homeController.js" />
+    <Content Include="Scripts\app\services\accountService.js" />
+    <Content Include="Scripts\app\services\homeService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Reports\Data\MPIReportDataSet.xsc">

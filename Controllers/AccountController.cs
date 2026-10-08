@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using System.Web.Security;
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
@@ -34,8 +35,21 @@ namespace MPI_Report.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
+           
             if (!ModelState.IsValid)
             {
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        errors = ModelState.Values
+                            .SelectMany(value => value.Errors)
+                            .Select(error => error.ErrorMessage)
+                            .ToList()
+                    });
+                }
+
                 return View(model);
             }
 
@@ -43,17 +57,35 @@ namespace MPI_Report.Controllers
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid username or password.");
+
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        errors = new[] { "Invalid username or password." }
+                    });
+                }
+
                 return View(model);
             }
 
             FormsAuthentication.SetAuthCookie(user.Username, model.RememberMe);
 
-            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+            var redirectUrl = !string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl)
+                ? returnUrl
+                : Url.Action("Index", "Home");
+
+            if (Request.IsAjaxRequest())
             {
-                return Redirect(returnUrl);
+                return Json(new
+                {
+                    success = true,
+                    redirectUrl
+                });
             }
 
-            return RedirectToAction("Index", "Home");
+            return Redirect(redirectUrl);
         }
 
         [Authorize]

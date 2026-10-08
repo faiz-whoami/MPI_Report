@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using MPI_Report.Infrastructure;
 using MPI_Report.Models;
@@ -39,6 +40,19 @@ namespace MPI_Report.Controllers
             model.DailyMeetingCount = counts.DailyMeetingCount;
             model.ChecklistCount = counts.ChecklistCount;
             model.MpiReportCount = counts.MpiReportCount;
+
+            if (Request.IsAjaxRequest())
+            {
+                string cookieToken;
+                string formToken;
+                AntiForgery.GetTokens(null, out cookieToken, out formToken);
+
+                return Json(new
+                {
+                    dashboard = model,
+                    antiForgeryToken = formToken
+                }, JsonRequestBehavior.AllowGet);
+            }
 
             return View(model);
         }

@@ -1,4 +1,14 @@
 ﻿app.service('homeService', function ($http) {
+    this.getDashboard = function () {
+        return $http({
+            method: 'GET',
+            url: '/Home/Index',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+    };
+
     this.selectJob = function (selectJobUrl, jobId, antiForgeryToken) {
         var formData = new URLSearchParams();
         formData.append('jobId', jobId);

@@ -1,5 +1,5 @@
 ﻿app.controller('homeController', function ($scope, homeService) {
-    $scope.dashboard = window.dashboardData || {
+    $scope.dashboard = {
         Jobs: [],
         SelectedJobId: null,
         SelectedJobNo: '',
@@ -8,11 +8,24 @@
         DailyMeetingCount: 0,
         ChecklistCount: 0,
         MpiReportCount: 0,
-        SelectJobUrl: '/Home/SelectJob'
+        SelectJobUrl: '/Home/SelectJob',
+        IndexUrl: '/Home/Index'
     };
 
-    $scope.selectedJobId = $scope.dashboard.SelectedJobId;
-    $scope.antiForgeryToken = $scope.dashboard.AntiForgeryToken || '';
+    $scope.selectedJobId = null;
+    $scope.antiForgeryToken = '';
+    $scope.isLoading = true;
+    $scope.loadError = '';
+
+    homeService.getDashboard().then(function (response) {
+        $scope.dashboard = angular.extend($scope.dashboard, response.data.dashboard);
+        $scope.selectedJobId = $scope.dashboard.SelectedJobId;
+        $scope.antiForgeryToken = response.data.antiForgeryToken || '';
+        $scope.isLoading = false;
+    }, function () {
+        $scope.loadError = 'Unable to load the dashboard.';
+        $scope.isLoading = false;
+    });
 
     $scope.selectJob = function () {
         if (!$scope.selectedJobId) {
@@ -24,7 +37,7 @@
             $scope.selectedJobId,
             $scope.antiForgeryToken
         ).then(function () {
-            window.location.href = $scope.dashboard.IndexUrl || '/Home/Index';
+            window.location.href = $scope.dashboard.IndexUrl;
         }, function () {
             window.location.reload();
         });
