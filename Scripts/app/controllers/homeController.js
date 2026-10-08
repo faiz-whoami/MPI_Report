@@ -17,7 +17,7 @@
     $scope.isLoading = true;
     $scope.loadError = '';
 
-    homeService.getDashboard().then(function (response) {
+  homeService.getDashboard().then(function (response) {
         $scope.dashboard = angular.extend($scope.dashboard, response.data.dashboard);
         $scope.selectedJobId = $scope.dashboard.SelectedJobId;
         $scope.antiForgeryToken = response.data.antiForgeryToken || '';
@@ -25,8 +25,7 @@
     }, function () {
         $scope.loadError = 'Unable to load the dashboard.';
         $scope.isLoading = false;
-    });
-
+  });
     $scope.selectJob = function () {
         if (!$scope.selectedJobId) {
             return;

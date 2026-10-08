@@ -53,7 +53,7 @@ namespace MPI_Report.Controllers
                     antiForgeryToken = formToken
                 }, JsonRequestBehavior.AllowGet);
             }
-
+            System.Diagnostics.Debug.WriteLine(model);
             return View(model);
         }
 

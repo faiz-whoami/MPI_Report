@@ -2,55 +2,193 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-    ViewBag.Title = "Sign In";
+    ViewBag.Title = "Admin Login";
 }
 
-<div class="row" style="margin-top: 80px;" ng-controller="accountController">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <strong>Inspections Track</strong>
+<div class="container login-page"
+     ng-controller="accountController">
+
+    <div class="row login-card">
+
+        <!-- LEFT SIDE -->
+        <div class="col-md-6 login-brand">
+
+            <div class="brand-content">
+
+                <div class="brand-logo">
+                    <span class="glyphicon glyphicon-check"></span>
+                </div>
+
+                <h2>Inspection Track</h2>
+
+                <p class="brand-tagline">
+                    Safer Operations. Higher Standards.
+                </p>
+
+                <div class="brand-features">
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="glyphicon glyphicon-check"></span>
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Track Inspections</strong>
+                            <small>Monitor progress and inspection status</small>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="glyphicon glyphicon-file"></span>
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Manage Reports</strong>
+                            <small>Generate and manage inspection reports</small>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Control Access</strong>
+                            <small>Secure role-based access management</small>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="panel-body">
-                <p class="text-muted">Sign in to continue</p>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="col-md-6 login-form">
+
+            <div class="login-content">
+
+                <div class="text-center">
+
+                    <div class="login-logo">
+                        <span class="glyphicon glyphicon-lock"></span>
+                    </div>
+
+                    <h2>Admin Login</h2>
+
+                    <p class="login-subtitle">
+                        Sign in to access your admin dashboard
+                    </p>
+
+                </div>
 
                 @Html.AntiForgeryToken()
 
-                <div class="alert alert-danger" ng-if="errorMessage">
-                    {{ errorMessage }}
+
+                <!-- Error -->
+                <div class="alert alert-danger login-alert"
+                     ng-if="errorMessage">
+
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span>{{ errorMessage }}</span>
+
                 </div>
 
-                <form name="loginForm" ng-submit="login()" novalidate>
+
+                <form name="loginForm"
+                      ng-submit="login()"
+                      novalidate>
+
+                    <!-- Username -->
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input id="username"
-                               name="username"
-                               type="text"
-                               class="form-control"
-                               autocomplete="username"
-                               ng-model="model.username"
-                               required />
+
+                        <label for="username">
+                            Username or Email
+                        </label>
+
+                        <div class="input-wrapper">
+                            <span class="glyphicon glyphicon-user input-icon"></span>
+
+                            <input id="username"
+                                   name="username"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Enter username or email"
+                                   autocomplete="username"
+                                   ng-model="model.username"
+                                   required />
+                        </div>
+
                     </div>
 
+
+                    <!-- Password -->
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input id="password"
-                               name="password"
-                               type="password"
-                               class="form-control"
-                               autocomplete="current-password"
-                               ng-model="model.password"
-                               required />
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+                            <span class="glyphicon glyphicon-lock input-icon"></span>
+
+                            <input id="password"
+                                   name="password"
+                                   type="password"
+                                   class="form-control"
+                                   placeholder="Enter your password"
+                                   autocomplete="current-password"
+                                   ng-model="model.password"
+                                   required />
+                        </div>
+
                     </div>
 
+
+                    <!-- Remember -->
+                    <div class="clearfix login-options">
+
+                        <label class="remember-me">
+                            <input type="checkbox"
+                                   ng-model="model.rememberMe" />
+
+                            <span>Remember me</span>
+                        </label>
+
+                    </div>
+
+
+                    <!-- Login -->
                     <button type="submit"
-                            class="btn btn-primary btn-block"
+                            class="btn btn-primary btn-block login-button"
                             ng-disabled="loginForm.$invalid || isSubmitting">
-                        <span ng-if="!isSubmitting">Login</span>
-                        <span ng-if="isSubmitting">Signing in...</span>
+
+                        <span ng-if="!isSubmitting">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Sign In
+                        </span>
+
+                        <span ng-if="isSubmitting">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                            Signing in...
+                        </span>
+
                     </button>
+
                 </form>
+
+                <div class="login-footer">
+                    Secure access to Inspection Track
+                </div>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
