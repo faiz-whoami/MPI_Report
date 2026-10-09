@@ -1,0 +1,22 @@
+---
+description: MVC JSON APIs, services, and repositories
+globs: "{Controllers,Services,Data,ViewModels,Infrastructure,Filters}/**/*.cs"
+alwaysApply: false
+---
+
+# MVC backend
+
+- Inherit JSON actions from `AdminApiController` (`ApiOk` / `ApiFail`).
+- Protect JSON POSTs with `[ValidateAjaxAntiForgeryToken]`.
+- Return view models, not EF entities, from JSON actions.
+- Repositories: `Data/Repositories/Interfaces` + `Implementations`. Inject `ApplicationDbContext` in request scope.
+- Bind new services/repos in `App_Start/NinjectConfig.cs`.
+- Job-scoped `List` when no job: `{ success: false, data: { NeedsJob: true }, errors: ["Select a job first."] }`.
+
+```csharp
+[HttpGet]
+public async Task<ActionResult> List(string search)
+{
+    return ApiOk(await _service.ListAsync(search));
+}
+```

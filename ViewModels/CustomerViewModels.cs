@@ -58,6 +58,10 @@ namespace MPI_Report.ViewModels
             public string Address { get; set; }
 
             public bool IsActive { get; set; }
+
+            public int RigCount { get; set; }
+
+            public int JobCount { get; set; }
         }
     
 }

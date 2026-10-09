@@ -1,64 +1,55 @@
 ﻿<header class="app-header">
-
     <div class="header-left">
-
-        @*<button type="button"
-                class="sidebar-toggle"
-                id="sidebarToggle">
-
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-
-        </button>*@
-
         <div class="header-page-title">
-
             <span class="header-title">
                 @ViewBag.Title
             </span>
-
         </div>
-
     </div>
 
+    <div class="dashboard-search" ng-class="{ 'search-focused': searchText.length > 0 }">
+        <span class="glyphicon glyphicon-search search-icon"></span>
+
+        <input type="text"
+               class="search-input"
+               ng-model="searchText"
+               placeholder="Search anything..."
+               aria-label="Search"
+               autocomplete="off">
+
+        <button type="button"
+                class="search-clear"
+                ng-if="searchText"
+                ng-click="searchText = ''"
+                aria-label="Clear search">
+        </button>
+
+        <span class="search-shortcut">Search</span>
+    </div>
 
     <div class="header-right">
-
         <button class="header-icon-button"
                 type="button"
                 title="Notifications">
-
             <span class="glyphicon glyphicon-bell"></span>
-
             <span class="notification-dot"></span>
-
         </button>
-
-
         @if (Request.IsAuthenticated)
         {
             <div class="header-user">
-
                 <div class="user-avatar">
                     @User.Identity.Name.Substring(0, 1).ToUpper()
                 </div>
-
                 <div class="user-details">
-
                     <span class="user-name">
                         @User.Identity.Name
                     </span>
-
                     <span class="user-role">
                         Admin
                     </span>
-
                 </div>
-
                 <span class="glyphicon glyphicon-chevron-down user-arrow"></span>
-
             </div>
         }
-
     </div>
-
 </header>

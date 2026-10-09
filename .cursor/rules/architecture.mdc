@@ -1,0 +1,14 @@
+---
+description: Inspections Track admin portal architecture
+alwaysApply: true
+---
+
+# Architecture
+
+- ASP.NET MVC 5 + AngularJS 1.8.2. Razor shells own routes; Angular owns page data.
+- Flow: Controller JSON action → domain service → repository → `ApplicationDbContext`.
+- Never mix View and JSON in one action. `Index`/`Create`/`Edit` return Razor; `List`/`Get`/`Create` POST return JSON.
+- JSON envelope: `{ success, data, errors }`. Serialize with Newtonsoft (ISO dates). PascalCase property names inside `data` to match existing Angular.
+- Job-scoped modules (Inventory, Checklists, CAs, Meetings) take `jobId` from `JobContext` in the controller, never from the client body.
+- Do not grow `IPlatformService`. Add or extend a domain service instead.
+- Do not return `PasswordHash`. Do not add a world map or e-commerce widgets.

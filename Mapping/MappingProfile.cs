@@ -21,8 +21,10 @@ namespace MPI_Report.Mapping
 
         private void ConfigureCustomerMappings()
         {
-            // Entity -> List ViewModel
             CreateMap<Customer, CustomerListViewModel>();
+            CreateMap<Customer, CustomerListItemViewModel>()
+                .ForMember(dest => dest.RigCount, opt => opt.Ignore())
+                .ForMember(dest => dest.JobCount, opt => opt.Ignore());
 
             // Entity -> Form ViewModel
             CreateMap<Customer, CustomerFormViewModel>();
@@ -57,6 +59,13 @@ namespace MPI_Report.Mapping
                     opt => opt.MapFrom(src =>
                         src.Customer != null
                             ? src.Customer.Name
+                            : string.Empty)
+                )
+                .ForMember(
+                    dest => dest.JobNo,
+                    opt => opt.MapFrom(src =>
+                        src.Job != null
+                            ? src.Job.JobNo
                             : string.Empty)
                 );
 

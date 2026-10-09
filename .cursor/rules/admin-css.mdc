@@ -1,0 +1,13 @@
+---
+description: Admin portal CSS conventions
+globs: Content/CSS/**/*.css
+alwaysApply: false
+---
+
+# CSS
+
+- Layout chrome: `dashboard-layout.css`. Shared page/card/table/badge: `admin.styles.css`.
+- Feature styles: `Content/CSS/{module}.styles.css` (example: `inventory.styles.css`).
+- Bootstrap 3 for grid/forms. Custom CSS for the admin shell (sidebar, KPIs, cards).
+- Reuse `.page-header-section`, `.admin-card`, `.stat-card`, `.status-badge`.
+- No Dabang clone (visitor waves, world map, sales widgets).

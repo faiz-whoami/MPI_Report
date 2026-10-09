@@ -18,6 +18,7 @@ namespace MPI_Report.Controllers
             _platformService = platformService;
         }
 
+
         public ActionResult Index()
         {
             int? jobId = JobContext.GetJobId(Session);

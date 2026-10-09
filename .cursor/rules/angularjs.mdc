@@ -1,0 +1,22 @@
+---
+description: AngularJS 1.8.2 module, controller, and service conventions
+globs: Scripts/app/**/*.js
+alwaysApply: false
+---
+
+# AngularJS
+
+- One file per controller/service: `Scripts/app/controllers/{module}Controller.js`, `Scripts/app/services/{module}Service.js`.
+- Register on `myApp`. Controllers talk only to their service. Services use `$http`.
+- Load page scripts in the Razor `@section scripts`, not in `_Layout` (except `app.js`).
+- POSTs rely on the `app.js` interceptor for `RequestVerificationToken`.
+- Handle `{ success, data, errors }` and `data.NeedsJob`.
+- Keep `$scope` style (no components). Do not add ui-router.
+
+```javascript
+app.service('inventoryService', function ($http) {
+    this.list = function (params) {
+        return $http.get('/Inventory/List', { params: params });
+    };
+});
+```

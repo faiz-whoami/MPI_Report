@@ -1,0 +1,14 @@
+---
+description: Razor shells for Angular admin pages
+globs: Views/**/*.cshtml
+alwaysApply: false
+---
+
+# Razor views
+
+- Authenticated pages use `_Layout`. Login uses `_LayoutLogin`.
+- Shells set `ViewBag.Title`, wrap content in `ng-controller`, and include `@Html.AntiForgeryToken()`.
+- Do not server-render tables the Angular controller will load.
+- `@section scripts` loads that page’s service then controller.
+- Shared chrome lives in `_Header.cshtml` and `_Sidebar.cshtml`. Mark the current sidebar link `active`.
+- Job-scoped pages show an in-page “select a job” prompt, not an empty table.

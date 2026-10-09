@@ -1,244 +1,223 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Dashboard";
 }
 
-<div ng-controller="homeController">
+<div class="dashboard-page" ng-controller="homeController">
 
-    <!-- DASHBOARD HEADER -->
-
+    <!-- Page Header -->
     <div class="dashboard-heading">
-
         <div>
-
-            <h1>Dashboard</h1>
-
+            <h1 class="dashboard-title">Dashboard</h1>
+            <p class="dashboard-subtitle">
+                Overview of your business and inspection activity
+            </p>
         </div>
 
+        <button type="button"
+                class="btn btn-default dashboard-refresh"
+                ng-click="loadDashboard()"
+                ng-disabled="isLoading">
+            <span class="glyphicon glyphicon-refresh"
+                  ng-class="{'spinning': isLoading}"></span>
+            Refresh
+        </button>
     </div>
 
-
-    <!-- JOB SELECTOR -->
-
-    <div class="dashboard-toolbar">
-
-        <form ng-if="!isLoading && !loadError"
-              ng-submit="selectJob()"
-              class="job-selector-form">
-
-            <div class="form-group">
-
-                <label for="jobId">
-                    Current Job
-                </label>
-
-                <select id="jobId"
-                        class="form-control"
-                        ng-model="selectedJobId"
-                        required>
-
-                    <option value="">
-                        -- Select job --
-                    </option>
-
-                    <option ng-repeat="job in dashboard.Jobs"
-                            value="{{job.JobId}}">
-
-                        {{job.CustomerName + ' / ' + job.RigName + ' / ' + job.JobNo}}
-
-                    </option>
-
-                </select>
-
-            </div>
-
-            <button type="submit"
-                    class="btn btn-primary dashboard-fetch-btn">
-
-                <span class="glyphicon glyphicon-refresh"></span>
-
-                Fetch Data
-
-            </button>
-
-        </form>
-
-    </div>
-
-
-    <!-- LOADING -->
-
-    <div ng-if="isLoading"
-         class="dashboard-loading">
-
+    <!-- Loading State -->
+    <div class="dashboard-loading"
+         ng-if="isLoading"
+         role="status">
         <span class="glyphicon glyphicon-refresh spinning"></span>
-
-        Loading dashboard...
-
+        <span>Loading dashboard...</span>
     </div>
 
-
-    <!-- ERROR -->
-
-    <div ng-if="loadError"
-         class="alert alert-danger">
-
+    <!-- Error State -->
+    <div class="alert alert-danger dashboard-error"
+         ng-if="!isLoading && loadError"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
         {{ loadError }}
 
+        <button type="button"
+                class="btn btn-danger btn-sm"
+                ng-click="loadDashboard()">
+            Try Again
+        </button>
     </div>
 
+    <!-- Dashboard Content -->
+    <div ng-if="!isLoading && !loadError">
 
-    <!-- CURRENT JOB -->
+        <!-- SECTION 1: KPI Statistics -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>At a glance</h2>
+                    <p>Your key business metrics</p>
+                </div>
+            </div>
 
-    <div ng-if="dashboard.SelectedJobNo"
-         class="current-job">
+            <div class="row dashboard-kpis">
+                <div class="col-xs-6 col-sm-6 col-lg-3"
+                     ng-repeat="stat in stats track by stat.id">
 
-        <span class="glyphicon glyphicon-briefcase"></span>
+                    <div class="kpi-card">
+                        <div class="kpi-card-top">
+                            <div class="kpi-icon"
+                                 ng-class="stat.iconClass">
+                                <span class="glyphicon"
+                                      ng-class="stat.icon"></span>
+                            </div>
 
-        <div>
+                            <span class="kpi-trend"
+                                  ng-if="stat.trend">
+                                {{ stat.trend }}
+                            </span>
+                        </div>
 
-            <span class="current-job-label">
-                Current Job
-            </span>
+                        <p class="kpi-label">{{ stat.label }}</p>
 
-            <strong>
-                {{dashboard.SelectedJobNo}}
-            </strong>
+                        <h3 class="kpi-value">
+                            {{ stat.value | number }}
+                        </h3>
 
-        </div>
+                        <p class="kpi-description">
+                            {{ stat.description }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Existing Summary Cards -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Quick overview</h2>
+                    <p>Important information and shortcuts</p>
+                </div>
+            </div>
+
+            <div class="row dashboard-cards">
+                <div class="col-xs-12 col-sm-6 col-lg-4"
+                     ng-repeat="item in cardList track by $index">
+
+                    <div class="panel panel-default dashboard-card">
+                        <div class="panel-body">
+
+                            <div class="dashboard-card-top">
+                                <div class="dashboard-card-icon"
+                                     ng-class="item.iconClass">
+                                    <span class="glyphicon"
+                                          ng-class="item.icon"></span>
+                                </div>
+
+                                <span class="dashboard-card-label">
+                                    {{ item.subtitle }}
+                                </span>
+                            </div>
+
+                            <h3 class="dashboard-card-title">
+                                {{ item.title }}
+                            </h3>
+
+                            <p class="dashboard-card-description">
+                                {{ item.description }}
+                            </p>
+
+                            <div class="dashboard-card-footer">
+                                <span class="dashboard-card-date">
+                                    {{ item.date }}
+                                </span>
+
+                                <button type="button"
+                                        class="btn btn-link dashboard-card-action"
+                                        ng-click="doAction(item)">
+                                    View Details
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="dashboard-empty"
+                 ng-if="!cardList || cardList.length === 0">
+                <span class="glyphicon glyphicon-inbox empty-icon"></span>
+                <h3>No dashboard information</h3>
+                <p>Dashboard cards will appear here when data is available.</p>
+
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-click="loadDashboard()">
+                    Reload Dashboard
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Charts -->
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Analytics</h2>
+                    <p>Understand report distribution and monthly activity</p>
+                </div>
+            </div>
+
+            <div class="row dashboard-charts">
+
+                <!-- Status Doughnut Chart -->
+                <div class="col-xs-12 col-lg-5">
+                    <div class="panel panel-default chart-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Reports by status</h3>
+                                <p>Current report distribution</p>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="chart-container chart-doughnut">
+                                <canvas id="statusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Bar Chart -->
+                <div class="col-xs-12 col-lg-7">
+                    <div class="panel panel-default chart-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Monthly reports</h3>
+                                <p>Report activity over the year</p>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="chart-container chart-bar">
+                                <canvas id="monthlyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
     </div>
-
-
-    <!-- STATISTICS -->
-
-    <div ng-if="!isLoading && !loadError"
-         class="dashboard-stat-grid">
-
-
-        <!-- INVENTORY -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon stat-icon-blue">
-
-                <span class="glyphicon glyphicon-th-large"></span>
-
-            </div>
-
-            <div class="stat-content">
-
-                <span class="stat-label">
-                    Inventory
-                </span>
-
-                <strong class="stat-value">
-                    {{dashboard.InventoryCount}}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- CORRECTIVE ACTIONS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon stat-icon-red">
-
-                <span class="glyphicon glyphicon-warning-sign"></span>
-
-            </div>
-
-            <div class="stat-content">
-
-                <span class="stat-label">
-                    Open Corrective Actions
-                </span>
-
-                <strong class="stat-value">
-                    {{dashboard.OpenCorrectiveActionCount}}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- MEETINGS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon stat-icon-green">
-
-                <span class="glyphicon glyphicon-calendar"></span>
-
-            </div>
-
-            <div class="stat-content">
-
-                <span class="stat-label">
-                    Daily Meetings
-                </span>
-
-                <strong class="stat-value">
-                    {{dashboard.DailyMeetingCount}}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- CHECKLISTS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon stat-icon-orange">
-
-                <span class="glyphicon glyphicon-check"></span>
-
-            </div>
-
-            <div class="stat-content">
-
-                <span class="stat-label">
-                    Checklists
-                </span>
-
-                <strong class="stat-value">
-                    {{dashboard.ChecklistCount}}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- MPI REPORTS -->
-
-        <div class="stat-card">
-
-            <div class="stat-icon stat-icon-purple">
-
-                <span class="glyphicon glyphicon-file"></span>
-
-            </div>
-
-            <div class="stat-content">
-
-                <span class="stat-label">
-                    MPI Reports
-                </span>
-
-                <strong class="stat-value">
-                    {{dashboard.MpiReportCount}}
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </div>
+
+@section scripts {
+    <link href="@Url.Content("~/Content/CSS/dashboard-home.css")"
+          rel="stylesheet" />
+
+    <script src="@Url.Content("~/Scripts/chart.umd.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/data/dashboard-data.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/controllers/homeController.js")"></script>
+}

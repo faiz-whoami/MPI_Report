@@ -45,6 +45,10 @@ namespace MPI_Report.ViewModels
         public DateTime? RecommendedDueDate { get; set; }
 
         public string InspectionResult { get; set; }
+
+        public string InspectorName { get; set; }
+
+        public string JobNo { get; set; }
     }
 
     //Inspection Report Form View MOdel
